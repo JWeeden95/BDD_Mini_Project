@@ -8,8 +8,6 @@ public class ShippingPage {
 
     public ShippingPage(WebDriver webDriver) {
         this.webDriver = webDriver;
-        webDriver.get("http://automationpractice.com/index.php?controller=order");
-
     }
 
     public String getUrl() {
@@ -20,8 +18,9 @@ public class ShippingPage {
         webDriver.findElement(By.id("cgv")).click();
     }
 
-    public void proceedToCheckout() {
+    public PaymentMethodPage proceedToCheckout() {
         webDriver.findElement(By.name("processCarrier")).click();
+        return new PaymentMethodPage(webDriver);
     }
     //http://automationpractice.com/index.php?controller=order
 }
