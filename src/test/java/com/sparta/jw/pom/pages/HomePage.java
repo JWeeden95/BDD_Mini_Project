@@ -11,9 +11,19 @@ public class HomePage {
 
     private static WebDriver webDriver;
     By proceedToCheckoutLink = new By.ByClassName("btn btn-default button button-medium");
+    By signIn = new By.ByClassName("login");
 
     public HomePage(WebDriver driver) {
         webDriver = driver;
+    }
+
+    public void goToHomePage(){
+        webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    public SignInPage goToSignInPage() {
+        webDriver.findElement(signIn).click();
+        return new SignInPage(webDriver);
     }
 
     public void addFirstItemToBasket() {
