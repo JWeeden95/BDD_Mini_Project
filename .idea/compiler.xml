@@ -10,5 +10,8 @@
         <module name="BDD_Mini_Project" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="BDD_Mini_Project" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
