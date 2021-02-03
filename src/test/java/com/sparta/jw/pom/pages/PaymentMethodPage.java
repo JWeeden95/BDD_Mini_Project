@@ -10,7 +10,7 @@ public class PaymentMethodPage {
     //http://automationpractice.com/index.php?controller=order&multi-shipping=
     private static WebDriver webDriver;
 
-    public void paymentMethodPage(WebDriver webDriver) {
+    public PaymentMethodPage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
@@ -28,7 +28,8 @@ public class PaymentMethodPage {
     public static void continueShopping() {
         webDriver.findElement(By.className("button-exclusive btn btn-default"));
     }
-    
 
-
+    public String getUrl(){
+        return webDriver.getCurrentUrl();
+    }
 }
