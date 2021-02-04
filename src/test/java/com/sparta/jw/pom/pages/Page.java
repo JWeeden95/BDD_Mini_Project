@@ -8,4 +8,8 @@ public abstract class Page {
     public String getUrl() {
         return webDriver.getCurrentUrl();
     }
+
+    public String getPageAsString() {
+        return webDriver.getPageSource();
+    }
 }

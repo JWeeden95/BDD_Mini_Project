@@ -1,6 +1,7 @@
 package com.sparta.jw.cucumber.stepdefs;
 
 import com.sparta.jw.pom.pages.*;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,9 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ShippingStepdef {
+    static WebDriver webDriver;
+    HomePage homePage;
     SignInPage signInPage;
-    WebDriver webDriver = new ChromeDriver();
-    HomePage homePage = new HomePage(webDriver);
     MyAccountPage myAccountPage;
     SummaryPage summaryPage;
     AddressPage addressPage;
@@ -21,19 +22,20 @@ public class ShippingStepdef {
 
     @Given("that I am on the shipping page")
     public void thatIAmOnTheShippingPage() {
-//        TODO: Get to shipping page from homepage
         homePage.goToHomePage();
         signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
         homePage = myAccountPage.goToHomePageFromMyAccountPage();
+        homePage.addFirstItemToBasket();
         summaryPage = homePage.goToSummaryPageFromHomePage();
         addressPage = summaryPage.goToAddressPageFromSummaryPage();
-        shippingPage = new ShippingPage(webDriver);
+        shippingPage = addressPage.goToShippingPageFromAddressPage();
+        Assertions.assertTrue(shippingPage.getPageAsString().contains("Choose a shipping option for this address:"));
     }
 
     @And("I have ticked the ‘agree to terms of service’ box")
     public void iHaveTickedTheAgreeToTermsOfServiceBox() {
-        Assertions.assertTrue(shippingPage.clickConfirmCheckbox());
+        shippingPage.clickConfirmCheckbox();
     }
 
     @When("I click proceed to checkout from shipping page")
@@ -41,15 +43,9 @@ public class ShippingStepdef {
         paymentMethodPage = shippingPage.goToPaymentMethodPageFromShippingPage();
     }
 
-    //This one needs to be replaced by the above to prevent duplicate error
-    @When("I click proceed to checkout")
-    public void iClickProceedToCheckout() {
-        paymentMethodPage = shippingPage.goToPaymentMethodPageFromShippingPage();
-    }
-
     @Then("the Payment page appears")
     public void thePaymentPageAppears() {
-        Assertions.assertEquals("http://automationpractice.com/index.php?controller=order&multi-shipping=", paymentMethodPage.getUrl());
+        Assertions.assertTrue(shippingPage.getPageAsString().contains("PLEASE CHOOSE YOUR PAYMENT METHOD"));
     }
 
 }
