@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class HomePage extends Page {
 
-    By proceedToCheckoutLink = new By.ByClassName("btn btn-default button button-medium");
+    By proceedToCheckoutLink = new By.ByCssSelector("#layer_cart > div.clearfix > div.layer_cart_cart.col-xs-12.col-md-6 > div.button-container > a");
     By continueShopping = new By.ByCssSelector("#layer_cart > div.clearfix > div.layer_cart_cart.col-xs-12.col-md-6 > div.button-container > span");
     By signIn = new By.ByClassName("login");
 
@@ -45,6 +45,7 @@ public class HomePage extends Page {
     }
 
     public SummaryPage goToSummaryPageFromHomePage() {
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(proceedToCheckoutLink).click();
         return new SummaryPage(webDriver);
     }

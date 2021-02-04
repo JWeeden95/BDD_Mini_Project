@@ -33,7 +33,7 @@ public class BeginCheckoutStepDefs {
 
     @When("I click proceed to checkout from home")
     public void iClickProceedToCheckoutFromHome() {
-        homePage.goToSummaryPage();
+        homePage.goToSummaryPageFromHomePage();
     }
 
     @Then("The order summary page appears")

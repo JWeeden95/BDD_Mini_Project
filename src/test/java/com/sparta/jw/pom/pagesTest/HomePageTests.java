@@ -6,6 +6,8 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 public class HomePageTests {
 
     static WebDriver webDriver;
@@ -28,6 +30,14 @@ public class HomePageTests {
         homePage.goToHomePage();
         SignInPage signInPage = homePage.goToSignInPage();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=my-account", signInPage.getUrl());
+    }
+
+    @Test
+    @DisplayName("GoToSummaryPage goes to the correct page")
+    void goToSummaryPageGoesToTheCorrectPage() {
+        homePage.goToHomePage();
+        homePage.addFirstItemToBasket();
+        homePage.goToSummaryPageFromHomePage();
     }
 
     @AfterAll
