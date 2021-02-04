@@ -1,6 +1,7 @@
 package com.sparta.jw.cucumber.stepdefs;
 
 import com.sparta.jw.pom.pages.*;
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,25 +12,27 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class PaymentMethodPageStepDefs {
     WebDriver webDriver = new ChromeDriver();
-    HomePage homePage;
+    HomePage homePage = new HomePage(webDriver);
+    SignInPage signInPage;
+    MyAccountPage myAccountPage;
     SummaryPage summaryPage;
+    AddressPage addressPage;
     ShippingPage shippingPage;
     PaymentMethodPage paymentMethodPage;
+    BankWirePaymentPage bankWirePaymentPage;
 
     @Given("I am on the Payment Method Page")
     public void iAmOnThePaymentMethodPage() {
         homePage.goToHomePage();
-        homePage.goToSignInPageFromHomePage();
-        webDriver.findElement(By.name("email")).sendKeys("greg.spratt@icloud.com");
-        webDriver.findElement(By.name("passwd")).sendKeys("honsoc-6Qekhi-hijqax");
-        webDriver.findElement(By.name("SubmitLogin")).click();
-        webDriver.findElement(By.className("home")).click();
+        signInPage = homePage.goToSignInPageFromHomePage();
+        myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
+        homePage = myAccountPage.goToHomePageFromMyAccountPage();
         homePage.addFirstItemToBasket();
-        homePage.goToSummaryPageFromHomePage();
-        summaryPage.goToAddressPageFromSummaryPage();
-        webDriver.findElement(By.name("processAddress")).click();
+        summaryPage = homePage.goToSummaryPageFromHomePage();
+        addressPage = summaryPage.goToAddressPageFromSummaryPage();
+        shippingPage = addressPage.goToShippingPageFromAddressPage();
         shippingPage.clickConfirmCheckbox();
-        shippingPage.goToPaymentMethodPageFromShippingPage();
+        paymentMethodPage = shippingPage.goToPaymentMethodPageFromShippingPage();
 
     }
 
@@ -40,6 +43,6 @@ public class PaymentMethodPageStepDefs {
 
     @Then("The bank wire payment page appears")
     public void theBankWirePaymentPageAppears() {
-        Assertions.assertEquals("http://automationpractice.com/index.php?fc=module&module=bankwire&controller=payment", webDriver.getCurrentUrl());
+        Assertions.assertEquals("http://automationpractice.com/index.php?fc=module&module=bankwire&controller=payment", bankWirePaymentPage.getUrl());
     }
 }
