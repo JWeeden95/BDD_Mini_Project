@@ -39,6 +39,7 @@ public class HomePageTests {
         BankWirePaymentPage bankWirePaymentPage = paymentMethodPage.goToBankWirePaymentPageFromPaymentMethodPage();
         PaymentConfirmationPage paymentConfirmationPage = bankWirePaymentPage.goToPaymentConfirmationPageFromBankWirePaymentPage();
         System.out.println(paymentConfirmationPage.getUrl());
+        Assertions.assertTrue(paymentConfirmationPage.getPageAsString().contains("Your order on My Store is complete."));
     }
 
 //    @Test
@@ -49,8 +50,8 @@ public class HomePageTests {
 //        homePage.goToSummaryPageFromHomePage();
 //    }
 
-    @AfterAll
-    static void breakDown(){
-        webDriver.quit();
-    }
+//    @AfterAll
+//    static void breakDown(){
+//        webDriver.quit();
+//    }
 }

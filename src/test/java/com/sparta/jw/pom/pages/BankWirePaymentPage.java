@@ -6,8 +6,9 @@ import org.openqa.selenium.WebDriver;
 public class BankWirePaymentPage extends Page{
 
     //http://automationpractice.com/index.php?fc=module&module=bankwire&controller=payment
-    By confirmOrder = new By.ByClassName("button btn btn-default button-medium");
+    By confirmOrder = new By.ByXPath("//*[@id=\"cart_navigation\"]/button");
     By goBackToPaymentPage = new By.ByClassName("button-exclusive btn btn-default");
+
 
     public BankWirePaymentPage(WebDriver driver) {
         this.webDriver = driver;
