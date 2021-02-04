@@ -18,18 +18,6 @@ public class AddressI15SD {
     private static AddressPage addressPage;
     By comments = new By.ByClassName("form-control");
 
-    @Before
-    public void setUp()
-    {
-        webDriver = new ChromeDriver();
-    }
-
-    @After
-    public void tearDown()
-    {
-        webDriver.quit();
-    }
-
     @Given("that I am on {string} page")
     public void thatIAmOnPage(String arg0) {
         webDriver.get(arg0);

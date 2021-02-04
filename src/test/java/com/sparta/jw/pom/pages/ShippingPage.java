@@ -21,5 +21,8 @@ public class ShippingPage extends Page{
         webDriver.findElement(By.name("processCarrier")).click();
         return new PaymentMethodPage(webDriver);
     }
+
+
+
     //http://automationpractice.com/index.php?controller=order
 }

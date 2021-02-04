@@ -15,17 +15,6 @@ public class AddToTrolleySD {
     private static WebDriver webDriver;
     private static HomePage homePage;
 
-    @Before
-    public void setUp() {
-        webDriver = new ChromeDriver();
-        webDriver.get("http://automationpractice.com/index.php");
-    }
-
-    @After
-    public void tearDown() {
-        webDriver.quit();
-    }
-
     @Given("I have access to {string} page")
     public void iHaveAccessToPage(String arg0) {
         Assertions.assertEquals(arg0, webDriver.getCurrentUrl());
