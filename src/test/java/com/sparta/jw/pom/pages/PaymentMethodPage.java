@@ -35,5 +35,7 @@ public class PaymentMethodPage {
     public String getUrl(){
         return webDriver.getCurrentUrl();
     }
+
 }
+
 

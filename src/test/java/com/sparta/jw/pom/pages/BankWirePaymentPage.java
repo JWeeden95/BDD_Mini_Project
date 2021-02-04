@@ -8,15 +8,25 @@ public class BankWirePaymentPage {
     //http://automationpractice.com/index.php?fc=module&module=bankwire&controller=payment
     private WebDriver webDriver;
     By confirmOrder = new By.ByClassName("button btn btn-default button-medium");
+    By goBackToPaymentPage = new By.ByClassName("button-exclusive btn btn-default");
 
     public BankWirePaymentPage(WebDriver driver) {
         this.webDriver = driver;
-        webDriver.findElement(By.className("bankwire")).click();
     }
 
     public PaymentConfirmationPage goToPaymentConfirmationPage() {
         webDriver.findElement(confirmOrder).click();
         return new PaymentConfirmationPage(webDriver);
     }
+
+    public String getUrl() {
+        return webDriver.getCurrentUrl();
+    }
+
+    public PaymentMethodPage goBackToPaymentConfirmationPage() {
+        webDriver.findElement(goBackToPaymentPage).click();
+        return new PaymentMethodPage(webDriver);
+    }
+
 
 }
