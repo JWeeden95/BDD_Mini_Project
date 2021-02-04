@@ -25,6 +25,12 @@ public class BeginCheckoutStepDefs {
         homePage.addFirstItemToBasket();
     }
 
+    @When("I click proceed to checkout from home")
+    public void iClickProceedToCheckoutFromHome() {
+        homePage.clickProceedToCheckout();
+    }
+
+    //The below will potentially cause a duplicate error on build so needs to be replaced by the one above (JF)
     @When("I click proceed to checkout")
     public void iClickProceedToCheckout() {
         homePage.clickProceedToCheckout();

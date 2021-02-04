@@ -11,10 +11,18 @@ public class HomePage {
 
     private static WebDriver webDriver;
     By proceedToCheckoutLink = new By.ByClassName("btn btn-default button button-medium");
+    By continueShopping = new By.ByCssSelector("#layer_cart > div.clearfix > div.layer_cart_cart.col-xs-12.col-md-6 > div.button-container > span");
     By signIn = new By.ByClassName("login");
 
     public HomePage(WebDriver driver) {
         webDriver = driver;
+        goToHomePage();
+    }
+
+    //not sure if I needed this or not, just added for piece of mind when testing the LetsDoThis class (JF)
+    public WebDriver homeDriver()
+    {
+        return webDriver;
     }
 
     public void goToHomePage(){
@@ -34,16 +42,12 @@ public class HomePage {
         action.moveToElement(element).perform();
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         webDriver.findElement(By.cssSelector("#homefeatured > li.ajax_block_product.col-xs-12.col-sm-4.col-md-3.first-in-line.first-item-of-tablet-line.first-item-of-mobile-line > div > div.right-block > div.button-container > a.button.ajax_add_to_cart_button.btn.btn-default")).click();
-
-        webDriver.findElement(By.cssSelector("#layer_cart > div.clearfix > div.layer_cart_cart.col-xs-12.col-md-6 > div.button-container > span")).click();
-
-      
+        webDriver.findElement(continueShopping).click();
     }
 
     public SummaryPage clickProceedToCheckout() {
         webDriver.findElement(proceedToCheckoutLink).click();
         return new SummaryPage(webDriver);
-
     }
 
     public boolean correctCartAmount(WebDriver driver, int itemCount) {
