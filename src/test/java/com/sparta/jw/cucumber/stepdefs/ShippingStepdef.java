@@ -1,9 +1,6 @@
 package com.sparta.jw.cucumber.stepdefs;
 
-import com.sparta.jw.pom.pages.BankWirePaymentPage;
-import com.sparta.jw.pom.pages.PaymentConfirmationPage;
-import com.sparta.jw.pom.pages.PaymentMethodPage;
-import com.sparta.jw.pom.pages.ShippingPage;
+import com.sparta.jw.pom.pages.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,11 +10,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ShippingStepdef {
-    private ShippingPage shippingPage;
-    private PaymentMethodPage paymentMethodPage;
+    SignInPage signInPage;
+    WebDriver webDriver = new ChromeDriver();
+    HomePage homePage = new HomePage(webDriver);
+    MyAccountPage myAccountPage;
+    SummaryPage summaryPage;
+    AddressPage addressPage;
+    ShippingPage shippingPage;
+    PaymentMethodPage paymentMethodPage;
 
     @Given("that I am on the shipping page")
-    public void thatIAmOnTheShippingPage(WebDriver webDriver) {
+    public void thatIAmOnTheShippingPage() {
+//        TODO: Get to shipping page from homepage
+        homePage.goToHomePage();
+        signInPage = homePage.goToSignInPage();
+        myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
+        homePage = myAccountPage.goToHomePageFromMyAccountPage();
+        summaryPage = homePage.goToSummaryPageFromHomePage();
+        addressPage = summaryPage.goToAddressPageFromSummaryPage();
         shippingPage = new ShippingPage(webDriver);
     }
 
@@ -28,13 +38,13 @@ public class ShippingStepdef {
 
     @When("I click proceed to checkout from shipping page")
     public void iClickProceedToCheckoutFromShippingPage() {
-        paymentMethodPage = shippingPage.clickGoToPaymentMethodPage();
+        paymentMethodPage = shippingPage.goToPaymentMethodPageFromShippingPage();
     }
 
     //This one needs to be replaced by the above to prevent duplicate error
     @When("I click proceed to checkout")
     public void iClickProceedToCheckout() {
-        paymentMethodPage = shippingPage.clickGoToPaymentMethodPage();
+        paymentMethodPage = shippingPage.goToPaymentMethodPageFromShippingPage();
     }
 
     @Then("the Payment page appears")

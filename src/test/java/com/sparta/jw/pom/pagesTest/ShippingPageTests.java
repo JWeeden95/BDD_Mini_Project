@@ -28,7 +28,7 @@ public class ShippingPageTests {
     @DisplayName("Test with POM")
     void commentsLinkTestWithPOM() {
         shippingPage.clickConfirmCheckbox();
-        shippingPage.clickGoToPaymentMethodPage();
+        shippingPage.goToPaymentMethodPageFromShippingPage();
         System.out.println(shippingPage.getUrl());
     }
 
@@ -44,7 +44,7 @@ public class ShippingPageTests {
 //              - create summary page and go to it
         homePage.addFirstItemToBasket();
         summaryPage = new SummaryPage(homePage.homeDriver());
-        summaryPage.goToSummaryPage("http://automationpractice.com/index.php?controller=order");
+//        summaryPage.goToSummaryPage("http://automationpractice.com/index.php?controller=order");
 
 //        Summary page
 //              - create login page and go to it
