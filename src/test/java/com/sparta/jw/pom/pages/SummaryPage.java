@@ -23,4 +23,10 @@ public class SummaryPage {
         return new AddressPage(webDriver);
     }
 
+    //Added by me for testing on LetsDoThis class, remove if you need to (JF)
+    public WebDriver clickProceedToCheckoutAtSummaryPageNoSignIn() {
+        webDriver.findElement(By.linkText("Proceed to checkout")).click();
+        return webDriver;
+    }
+
 }
