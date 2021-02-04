@@ -15,16 +15,10 @@ public class BeginCheckoutStepDefs {
     private WebDriver webDriver;
     private HomePage homePage;
 
-    @Before
-    void setup() {
-        webDriver = new ChromeDriver();
-        homePage = new HomePage(webDriver);
-    }
-
-    @Given("I am on the home page")
-    public void iAmOnTheHomePage() {
-        homePage.goToHomePage();
-    }
+//    @Given("I am on the home page")
+//    public void iAmOnTheHomePage() {
+//        homePage.goToHomePage();
+//    }
 
     @And("I have clicked add to cart")
     public void iHaveClickedAddToCart() {
