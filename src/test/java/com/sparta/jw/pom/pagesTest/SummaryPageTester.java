@@ -9,22 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SummaryPageTester {
 
-    static WebDriver webDriver;
     boolean isTheCartAmountCorrect;
-    private HomePage homePage;
-
-//    @Before
-//    public void setup() {
-//        webDriver = new ChromeDriver();
-//        homePage = new HomePage(webDriver);
-//
-//    }
-
-
-//    @AfterEach
-//    static void tearDown() {
-//        webDriver.close();
-//    }
+    WebDriver webDriver = new ChromeDriver();
+    private HomePage homePage = new HomePage(webDriver);
 
     @Test
     @DisplayName("Clicking the proceed to checkout button")
@@ -38,6 +25,7 @@ public class SummaryPageTester {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=order", webDriver.getCurrentUrl());
         AddressPage addressPage = summaryPage.goToAddressPageFromSummaryPage();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=order&step=1",webDriver.getCurrentUrl());
+        webDriver.close();
     }
 
     @Test
@@ -49,13 +37,9 @@ public class SummaryPageTester {
         homePage = myAccountPage.goToHomePageFromMyAccountPage();
         homePage.addFirstItemToBasket();
         SummaryPage summaryPage = homePage.goToSummaryPageFromHomePage();
+        isTheCartAmountCorrect = summaryPage.correctCartAmountOnTheSummaryPage(1);
         Assertions.assertTrue(isTheCartAmountCorrect);
-
+        webDriver.close();
     }
-
-//    @AfterAll
-//    static void afterAll() {
-//        webDriver.quit();
-//    }
 
 }
