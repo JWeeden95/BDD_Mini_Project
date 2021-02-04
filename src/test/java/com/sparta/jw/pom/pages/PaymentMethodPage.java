@@ -14,7 +14,7 @@ public class PaymentMethodPage extends Page{
     }
 
 
-    public BankWirePaymentPage goToPayByBankWire() {
+    public BankWirePaymentPage goToBankWirePaymentPageFromPaymentMethodPage() {
         webDriver.findElement(By.className("bankwire")).click();
         return new BankWirePaymentPage(webDriver);
 

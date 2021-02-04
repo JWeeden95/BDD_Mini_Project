@@ -21,24 +21,23 @@ public class SummaryPageTester {
 //        webDriver.close();
 //    }
 
-    @Test
-    @DisplayName("Clicking the proceed to checkout button")
-    public void clickCheckoutButton(){
-        SummaryPage summaryPage = new SummaryPage(webDriver);
-        summaryPage.goToSummaryPage();
-        summaryPage.goToAddressPage();
-//Write test to test the summary page product counter method
+//    @Test
+//    @DisplayName("Clicking the proceed to checkout button")
+//    public void clickCheckoutButton(){
+//        SummaryPage summaryPage = new SummaryPage(webDriver);
+//        summaryPage.goToSummaryPage();
+//        summaryPage.goToAddressPage();
+////Write test to test the summary page product counter method
+//
+//
+//    }
+//    @Test
+//    @DisplayName("Testing the cart amount on the cart summary page")
+//    public void cartAmountCheckOnSummaryPage(){
+//        SummaryPage summaryPage = new SummaryPage(webDriver);
+//        summaryPage.goToSummaryPage();
+//        summaryPage.goToAddressPage();
+////Write test to test the summary page product counter method
 
 
-    }
-    @Test
-    @DisplayName("Testing the cart amount on the cart summary page")
-    public void cartAmountCheckOnSummaryPage(){
-        SummaryPage summaryPage = new SummaryPage(webDriver);
-        summaryPage.goToSummaryPage();
-        summaryPage.goToAddressPage();
-//Write test to test the summary page product counter method
-
-
-    }
 }

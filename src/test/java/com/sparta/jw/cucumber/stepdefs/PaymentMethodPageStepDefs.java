@@ -19,7 +19,7 @@ public class PaymentMethodPageStepDefs {
     @Given("I am on the Payment Method Page")
     public void iAmOnThePaymentMethodPage() {
         homePage.goToHomePage();
-        homePage.goToSignInPage();
+        homePage.goToSignInPageFromHomePage();
         webDriver.findElement(By.name("email")).sendKeys("greg.spratt@icloud.com");
         webDriver.findElement(By.name("passwd")).sendKeys("honsoc-6Qekhi-hijqax");
         webDriver.findElement(By.name("SubmitLogin")).click();
@@ -29,13 +29,13 @@ public class PaymentMethodPageStepDefs {
         summaryPage.goToAddressPageFromSummaryPage();
         webDriver.findElement(By.name("processAddress")).click();
         shippingPage.clickConfirmCheckbox();
-        shippingPage.clickGoToPaymentMethodPage();
+        shippingPage.goToPaymentMethodPageFromShippingPage();
 
     }
 
     @When("I click pay by bank wire")
     public void iClickPayByBankWire() {
-        paymentMethodPage.goToPayByBankWire();
+        paymentMethodPage.goToBankWirePaymentPageFromPaymentMethodPage();
     }
 
     @Then("The bank wire payment page appears")

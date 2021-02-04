@@ -1,7 +1,6 @@
 package com.sparta.jw.pom.pagesTest;
 
-import com.sparta.jw.pom.pages.HomePage;
-import com.sparta.jw.pom.pages.SignInPage;
+import com.sparta.jw.pom.pages.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,20 +24,30 @@ public class HomePageTests {
     }
 
     @Test
-    @DisplayName("Home page to sign in page")
+    @DisplayName("Home page to end")
     public void homePageToSignInPage() {
         homePage.goToHomePage();
-        SignInPage signInPage = homePage.goToSignInPage();
-        Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=my-account", signInPage.getUrl());
+        SignInPage signInPage = homePage.goToSignInPageFromHomePage();
+        MyAccountPage myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
+        homePage = myAccountPage.goToHomePageFromMyAccountPage();
+        homePage.addFirstItemToBasket();
+        SummaryPage summaryPage = homePage.goToSummaryPageFromHomePage();
+        AddressPage addressPage = summaryPage.goToAddressPageFromSummaryPage();
+        ShippingPage shippingPage = addressPage.goToShippingPageFromAddressPage();
+        shippingPage.clickConfirmCheckbox();
+        PaymentMethodPage paymentMethodPage = shippingPage.goToPaymentMethodPageFromShippingPage();
+        BankWirePaymentPage bankWirePaymentPage = paymentMethodPage.goToBankWirePaymentPageFromPaymentMethodPage();
+        PaymentConfirmationPage paymentConfirmationPage = bankWirePaymentPage.goToPaymentConfirmationPageFromBankWirePaymentPage();
+        System.out.println(paymentConfirmationPage.getUrl());
     }
 
-    @Test
-    @DisplayName("GoToSummaryPage goes to the correct page")
-    void goToSummaryPageGoesToTheCorrectPage() {
-        homePage.goToHomePage();
-        homePage.addFirstItemToBasket();
-        homePage.goToSummaryPageFromHomePage();
-    }
+//    @Test
+//    @DisplayName("GoToSummaryPage goes to the correct page")
+//    void goToSummaryPageGoesToTheCorrectPage() {
+//        homePage.goToHomePage();
+//        homePage.addFirstItemToBasket();
+//        homePage.goToSummaryPageFromHomePage();
+//    }
 
     @AfterAll
     static void breakDown(){

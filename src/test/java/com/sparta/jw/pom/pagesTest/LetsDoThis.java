@@ -62,6 +62,6 @@ public class LetsDoThis {
 //              - Check comments
 //              - create Shipping page
         Assertions.assertTrue(addressPage.isCommentEmpty());
-        ShippingPage shippingPage = addressPage.goToShipping();
+        ShippingPage shippingPage = addressPage.goToShippingPageFromAddressPage();
     }
 }

@@ -4,7 +4,6 @@ import com.sparta.jw.pom.pages.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -23,20 +22,20 @@ public class OrderConfirmationStepdefs {
     @Given("that I am on the bank wire page")
     public void thatIAmOnTheBankWirePage() {
         homePage.goToHomePage();
-        signInPage = homePage.goToSignInPage();
+        signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
         homePage = myAccountPage.goToHomePageFromMyAccountPage();
         summaryPage = homePage.goToSummaryPageFromHomePage();
         addressPage = summaryPage.goToAddressPageFromSummaryPage();
-        shippingPage = addressPage.goToShippingPageFromAdressPage();
+        shippingPage = addressPage.goToShippingPageFromAddressPage();
         shippingPage.clickConfirmCheckbox();
-        paymentMethodPage = shippingPage.goToPaymentMethodPage();
-        bankWirePaymentPage = paymentMethodPage.goToPayByBankWire();
+        paymentMethodPage = shippingPage.goToPaymentMethodPageFromShippingPage();
+        bankWirePaymentPage = paymentMethodPage.goToBankWirePaymentPageFromPaymentMethodPage();
     }
 
     @When("I click confirm order")
     public void iClickConfirmOrder() {
-        bankWirePaymentPage.goToPaymentConfirmationPage();
+        bankWirePaymentPage.goToPaymentConfirmationPageFromBankWirePaymentPage();
     }
 
     @Then("the order confirmation page appears")

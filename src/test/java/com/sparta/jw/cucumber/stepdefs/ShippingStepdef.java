@@ -23,7 +23,7 @@ public class ShippingStepdef {
     public void thatIAmOnTheShippingPage() {
 //        TODO: Get to shipping page from homepage
         homePage.goToHomePage();
-        signInPage = homePage.goToSignInPage();
+        signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
         homePage = myAccountPage.goToHomePageFromMyAccountPage();
         summaryPage = homePage.goToSummaryPageFromHomePage();
