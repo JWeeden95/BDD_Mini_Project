@@ -2,6 +2,7 @@ package com.sparta.jw.cucumber.stepdefs;
 
 import com.sparta.jw.pom.pages.HomePage;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,24 +21,23 @@ public class BeginCheckoutStepDefs {
         homePage = new HomePage(webDriver);
     }
 
-    @Given("I have clicked add to cart")
+    @Given("I am on the home page")
+    public void iAmOnTheHomePage() {
+        homePage.goToHomePage();
+    }
+
+    @And("I have clicked add to cart")
     public void iHaveClickedAddToCart() {
         homePage.addFirstItemToBasket();
     }
 
     @When("I click proceed to checkout from home")
     public void iClickProceedToCheckoutFromHome() {
-        homePage.clickProceedToCheckout();
-    }
-
-    //The below will potentially cause a duplicate error on build so needs to be replaced by the one above (JF)
-    @When("I click proceed to checkout")
-    public void iClickProceedToCheckout() {
-        homePage.clickProceedToCheckout();
+        homePage.goToSummaryPage();
     }
 
     @Then("The order summary page appears")
     public void theOrderSummaryPageAppears() {
-        // TODO: insert assertion here
+        Assertions.assertEquals("http://automationpractice.com/index.php?controller=order", webDriver.getCurrentUrl());
     }
 }
