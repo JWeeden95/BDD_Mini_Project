@@ -48,21 +48,19 @@ public class AddressPage extends Page{
 
     public List<String> getShippingAddress()
     {
-        sAddress.add(webDriver.findElement(By.className("address item box")).findElement(By.className("address_firstname address_lastname")).getText());
-        sAddress.add(webDriver.findElement(By.className("address item box")).findElement(By.className("address_address1 address_address2")).getText());
-        sAddress.add(webDriver.findElement(By.className("address item box")).findElement(By.className("address_city address_state_name address_postcode")).getText());
-        sAddress.add(webDriver.findElement(By.className("address item box")).findElement(By.className("address_country_name")).getText());
-        sAddress.add(webDriver.findElement(By.className("address item box")).findElement(By.className("address_phone_mobile")).getText());
+        String string = webDriver.findElement(By.cssSelector("#address_delivery")).getText();
+        sAddress.addAll(Arrays.asList(string.split("([\n]|[,])")));
+        sAddress.remove(0);
+        sAddress.remove(6);
         return sAddress;
     }
 
     public List<String> getBillingAddress()
     {
-        bAddress.add(webDriver.findElement(By.className("address item box")).findElement(By.className("address_firstname address_lastname")).getText());
-        bAddress.add(webDriver.findElement(By.className("address item box")).findElement(By.className("address_address1 address_address2")).getText());
-        bAddress.add(webDriver.findElement(By.className("address item box")).findElement(By.className("address_city address_state_name address_postcode")).getText());
-        bAddress.add(webDriver.findElement(By.className("address item box")).findElement(By.className("address_country_name")).getText());
-        bAddress.add(webDriver.findElement(By.className("address item box")).findElement(By.className("address_phone_mobile")).getText());
+        String string = webDriver.findElement(By.cssSelector("#address_invoice")).getText();
+        bAddress.addAll(Arrays.asList(string.split("([\n]|[,])")));
+        bAddress.remove(0);
+        bAddress.remove(6);
         return bAddress;
     }
 
@@ -72,10 +70,18 @@ public class AddressPage extends Page{
         actualBillingAddress.addAll(Arrays.asList(address.split(",")));
     }
 
-    public boolean shippingIsBilling()
+    public boolean IsBillingAddressAndMyAddressTheSame(List<String> myAdd)
     {
-        String string = webDriver.findElement(By.id("addressesAreEquals")).getText();
-        return string.equals("checked");
+        boolean isSame = false;
+        getBillingAddress();
+        for(int i = 0; i < bAddress.size(); i++)
+        {
+            if(myAdd.get(i).equals(bAddress.get(i)))
+            {
+                isSame = true;
+            }
+        }
+        return isSame;
     }
 
     public ShippingPage goToShippingPageFromAddressPage()
