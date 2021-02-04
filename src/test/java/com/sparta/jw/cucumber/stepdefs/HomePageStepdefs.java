@@ -14,15 +14,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class HomePageStepdefs {
 
-    private WebDriver webDriver;
-    private HomePage homePage;
+    private WebDriver webDriver = new ChromeDriver();
+    private HomePage homePage = new HomePage(webDriver);
     private SignInPage signInPage;
-
-    @Before
-    public void setup() {
-        webDriver = new ChromeDriver();
-        homePage = new HomePage(webDriver);
-    }
 
     @Given("I am on the initial home page")
     public void iAmOnTheInitialHomePage() {
@@ -37,12 +31,6 @@ public class HomePageStepdefs {
     @Then("The sign in page appears")
     public void theSignInPageAppears() {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=my-account", signInPage.getUrl());
-    }
-
-    @After
-    public void tearDown()
-    {
-        webDriver.quit();
     }
 
 }
