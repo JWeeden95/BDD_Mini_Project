@@ -20,8 +20,8 @@ public class ShippingPageTests {
     @Test
     @DisplayName("Test with POM")
     void commentsLinkTestWithPOM() {
-        shippingPage.confirmCheckbox();
-        shippingPage.proceedToCheckout();
+        shippingPage.clickConfirmCheckbox();
+        shippingPage.clickGoToPaymentMethodPage();
         System.out.println(shippingPage.getUrl());
     }
 }

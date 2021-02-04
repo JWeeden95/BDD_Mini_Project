@@ -14,11 +14,11 @@ public class ShippingPage {
         return webDriver.getCurrentUrl();
     }
 
-    public void confirmCheckbox() {
+    public void clickConfirmCheckbox() {
         webDriver.findElement(By.id("cgv")).click();
     }
 
-    public PaymentMethodPage proceedToCheckout() {
+    public PaymentMethodPage clickGoToPaymentMethodPage() {
         webDriver.findElement(By.name("processCarrier")).click();
         return new PaymentMethodPage(webDriver);
     }
