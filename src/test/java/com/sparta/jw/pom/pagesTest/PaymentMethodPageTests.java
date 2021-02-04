@@ -10,37 +10,31 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class PaymentMethodPageTests {
     WebDriver webDriver = new ChromeDriver();
-    HomePage homePage;
+    HomePage homePage = new HomePage(webDriver);
     SummaryPage summaryPage;
+    AddressPage addressPage;
     ShippingPage shippingPage;
     PaymentMethodPage paymentMethodPage;
+    BankWirePaymentPage bankWirePaymentPage;
+    PaymentConfirmationPage paymentConfirmationPage;
 
 
     @Test
     @DisplayName("Testing Payment Method Page")
     void testingPaymentMethodPage() {
-        HomePage homePage = new HomePage(webDriver);
         homePage.goToHomePage();
-        homePage.goToSignInPageFromHomePage();
-        webDriver.findElement(By.name("email")).sendKeys("");
-        webDriver.findElement(By.name("passwd")).sendKeys("");
-        webDriver.findElement(By.name("SubmitLogin")).click();
-        webDriver.findElement(By.className("home")).click();
+        SignInPage signInPage = homePage.goToSignInPageFromHomePage();
+        MyAccountPage myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
+        homePage = myAccountPage.goToHomePageFromMyAccountPage();
         homePage.addFirstItemToBasket();
-        homePage.goToSummaryPageFromHomePage();
-        SummaryPage summaryPage = new SummaryPage(webDriver);
-        summaryPage.goToAddressPageFromSummaryPage();
-        webDriver.findElement(By.name("processAddress")).click();
-        ShippingPage shippingPage = new ShippingPage(webDriver);
+        summaryPage = homePage.goToSummaryPageFromHomePage();
+        addressPage = summaryPage.goToAddressPageFromSummaryPage();
+        shippingPage = addressPage.goToShippingPageFromAddressPage();
         shippingPage.clickConfirmCheckbox();
-        shippingPage.goToPaymentMethodPageFromShippingPage();
-        PaymentMethodPage paymentMethodPage = new PaymentMethodPage(webDriver);
-        paymentMethodPage.goToBankWirePaymentPageFromPaymentMethodPage();
-        Assertions.assertEquals("http://automationpractice.com/index.php?fc=module&module=bankwire&controller=payment", webDriver.getCurrentUrl());
-        BankWirePaymentPage bankWirePaymentPage = new BankWirePaymentPage(webDriver);
-//        bankWirePaymentPage.goToPaymentConfirmationPage();
-        webDriver.findElement(By.className("icon-chevron-right right")).click();
-
+        paymentMethodPage = shippingPage.goToPaymentMethodPageFromShippingPage();
+        bankWirePaymentPage = paymentMethodPage.goToBankWirePaymentPageFromPaymentMethodPage();
+        paymentConfirmationPage = bankWirePaymentPage.goToPaymentConfirmationPageFromBankWirePaymentPage();
+        System.out.println(paymentConfirmationPage.getUrl());
     }
 
 
