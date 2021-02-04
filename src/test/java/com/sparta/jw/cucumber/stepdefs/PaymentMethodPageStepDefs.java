@@ -25,11 +25,11 @@ public class PaymentMethodPageStepDefs {
         webDriver.findElement(By.name("SubmitLogin")).click();
         webDriver.findElement(By.className("home")).click();
         homePage.addFirstItemToBasket();
-        homePage.goToSummaryPage();
-        summaryPage.goToAddressPage();
+        homePage.goToSummaryPageFromHomePage();
+        summaryPage.goToAddressPageFromSummaryPage();
         webDriver.findElement(By.name("processAddress")).click();
-        shippingPage.confirmCheckbox();
-        shippingPage.proceedToCheckout();
+        shippingPage.clickConfirmCheckbox();
+        shippingPage.clickGoToPaymentMethodPage();
 
     }
 
