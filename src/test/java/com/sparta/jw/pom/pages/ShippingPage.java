@@ -17,7 +17,7 @@ public class ShippingPage extends Page{
 
     }
 
-    public PaymentMethodPage clickGoToPaymentMethodPage() {
+    public PaymentMethodPage goToPaymentMethodPageFromShippingPage() {
         webDriver.findElement(By.name("processCarrier")).click();
         return new PaymentMethodPage(webDriver);
     }
