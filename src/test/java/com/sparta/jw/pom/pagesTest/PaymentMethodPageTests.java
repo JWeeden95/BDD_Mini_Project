@@ -21,7 +21,7 @@ public class PaymentMethodPageTests {
     void testingPaymentMethodPage() {
         HomePage homePage = new HomePage(webDriver);
         homePage.goToHomePage();
-        homePage.goToSignInPage();
+        homePage.goToSignInPageFromHomePage();
         webDriver.findElement(By.name("email")).sendKeys("");
         webDriver.findElement(By.name("passwd")).sendKeys("");
         webDriver.findElement(By.name("SubmitLogin")).click();
@@ -33,9 +33,9 @@ public class PaymentMethodPageTests {
         webDriver.findElement(By.name("processAddress")).click();
         ShippingPage shippingPage = new ShippingPage(webDriver);
         shippingPage.clickConfirmCheckbox();
-        shippingPage.clickGoToPaymentMethodPage();
+        shippingPage.goToPaymentMethodPageFromShippingPage();
         PaymentMethodPage paymentMethodPage = new PaymentMethodPage(webDriver);
-        paymentMethodPage.goToPayByBankWire();
+        paymentMethodPage.goToBankWirePaymentPageFromPaymentMethodPage();
         Assertions.assertEquals("http://automationpractice.com/index.php?fc=module&module=bankwire&controller=payment", webDriver.getCurrentUrl());
         BankWirePaymentPage bankWirePaymentPage = new BankWirePaymentPage(webDriver);
 //        bankWirePaymentPage.goToPaymentConfirmationPage();

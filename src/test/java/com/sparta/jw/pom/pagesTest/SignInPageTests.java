@@ -26,7 +26,7 @@ public class SignInPageTests {
     @DisplayName("Sign in page to my account page")
     public void signInPageToMyAccountPage() {
         homePage.goToHomePage();
-        SignInPage signInPage = homePage.goToSignInPage();
+        SignInPage signInPage = homePage.goToSignInPageFromHomePage();
         MyAccountPage myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=my-account", myAccountPage.getUrl());
     }

@@ -78,7 +78,7 @@ public class AddressPage extends Page{
         return string.equals("checked");
     }
 
-    public ShippingPage goToShipping()
+    public ShippingPage goToShippingPageFromAddressPage()
     {
         webDriver.findElement(By.name("processAddress")).click();
         return new ShippingPage(webDriver);

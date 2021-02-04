@@ -19,7 +19,7 @@ public class SummaryPageStepdef {
 
     @And("I have {int} item")
     public void iHaveItem(int arg0) {
-        isTheCartAmountCorrect = SummaryPage.correctCartAmountOnTheSummaryPage(arg0);
+        //isTheCartAmountCorrect = SummaryPage.correctCartAmountOnTheSummaryPage(arg0);
     }
 
     @When("I click proceed to checkout from Summary page")
