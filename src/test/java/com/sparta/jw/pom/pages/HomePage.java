@@ -45,7 +45,7 @@ public class HomePage {
         webDriver.findElement(continueShopping).click();
     }
 
-    public SummaryPage clickProceedToCheckout() {
+    public SummaryPage goToSummaryPage() {
         webDriver.findElement(proceedToCheckoutLink).click();
         return new SummaryPage(webDriver);
     }
