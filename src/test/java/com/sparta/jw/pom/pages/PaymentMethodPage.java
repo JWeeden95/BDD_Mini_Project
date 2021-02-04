@@ -10,25 +10,31 @@ public class PaymentMethodPage {
     //http://automationpractice.com/index.php?controller=order&multi-shipping=
     private static WebDriver webDriver;
 
-    public void PaymentMethodPage(WebDriver webDriver) {
+    public PaymentMethodPage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
 
-    public static void payByBankWire() {
+    public static BankWirePaymentPage goToPayByBankWire() {
         webDriver.findElement(By.className("bankwire")).click();
+        return new BankWirePaymentPage(webDriver);
 
     }
 
-    public static void PayByCheque() {
-        webDriver.findElement(By.className("cheque")).click();
+//    public static BankChequePaymentPage goToPayByCheque() {
+//        webDriver.findElement(By.className("cheque")).click();
+//        return new BankChequePaymentPage(webDriver);
+//
+//    }
 
-    }
-
-    public static void continueShopping() {
+    public static ShippingPage clickContinueShoppingFromPaymentMethodPage() {
         webDriver.findElement(By.className("button-exclusive btn btn-default"));
+        return new ShippingPage(webDriver);
     }
 
-
+    public String getUrl(){
+        return webDriver.getCurrentUrl();
+    }
+}
 
 }
