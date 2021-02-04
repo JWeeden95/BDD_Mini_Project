@@ -54,6 +54,10 @@ public class HomePage {
         String total = webDriver.findElement(By.className("shopping_cart")).findElement(By.className("ajax_cart_quantity")).getText();
         return Integer.parseInt(total) == itemCount;
     }
+
+    public String getUrl(){
+        return webDriver.getCurrentUrl();
+    }
 }
 
 
