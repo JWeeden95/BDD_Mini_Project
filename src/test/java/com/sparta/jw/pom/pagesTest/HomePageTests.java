@@ -42,6 +42,15 @@ public class HomePageTests {
         Assertions.assertTrue(paymentConfirmationPage.getPageAsString().contains("Your order on My Store is complete."));
     }
 
+    @Test
+    @DisplayName("AlternativeGoToSummaryPage goes to correct page")
+    void alternativeGoToSummaryPageGoesToCorrectPage() {
+        homePage.goToHomePage();
+        homePage.addFirstItemToBasket();
+        homePage.clickContinueShopping();
+        homePage.goToSummaryPageFromHomePageAlternative();
+    }
+
 //    @Test
 //    @DisplayName("GoToSummaryPage goes to the correct page")
 //    void goToSummaryPageGoesToTheCorrectPage() {
