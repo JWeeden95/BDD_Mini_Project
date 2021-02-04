@@ -27,14 +27,13 @@ public class PaymentMethodPageTests {
         webDriver.findElement(By.name("SubmitLogin")).click();
         webDriver.findElement(By.className("home")).click();
         homePage.addFirstItemToBasket();
-//        homePage.goToSummaryPage();
+        homePage.goToSummaryPageFromHomePage();
         SummaryPage summaryPage = new SummaryPage(webDriver);
-        summaryPage.goToSummaryPage("http://automationpractice.com/index.php?controller=order");
-        summaryPage.goToAddressPage();
+        summaryPage.goToAddressPageFromSummaryPage();
         webDriver.findElement(By.name("processAddress")).click();
         ShippingPage shippingPage = new ShippingPage(webDriver);
-        shippingPage.confirmCheckbox();
-        shippingPage.proceedToCheckout();
+        shippingPage.clickConfirmCheckbox();
+        shippingPage.clickGoToPaymentMethodPage();
         PaymentMethodPage paymentMethodPage = new PaymentMethodPage(webDriver);
         paymentMethodPage.goToPayByBankWire();
         Assertions.assertEquals("http://automationpractice.com/index.php?fc=module&module=bankwire&controller=payment", webDriver.getCurrentUrl());
