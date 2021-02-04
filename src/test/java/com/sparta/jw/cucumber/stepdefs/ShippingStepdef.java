@@ -32,10 +32,6 @@ public class ShippingStepdef {
         shippingPage = addressPage.goToShippingPageFromAddressPage();
     }
 
-    @And("I have ticked the ‘agree to terms of service’ box")
-    public void iHaveTickedTheAgreeToTermsOfServiceBox() {
-        shippingPage.clickConfirmCheckbox();
-    }
 
     @When("I click proceed to checkout from shipping page")
     public void iClickProceedToCheckoutFromShippingPage() {
@@ -47,4 +43,13 @@ public class ShippingStepdef {
         Assertions.assertTrue(paymentMethodPage.getPageAsString().contains("Pay by bank wire"));
     }
 
+    @When("I click the agree to terms of service box")
+    public void iClickTheAgreeToTermsOfServiceBox() {
+        shippingPage.clickConfirmCheckbox();
+    }
+
+    @Then("the agree to terms of service box should be ticked")
+    public void theAgreeToTermsOfServiceBoxShouldBeTicked() {
+        Assertions.assertTrue(shippingPage.checkConfirmationCheckboxHasBeenTicked());
+    }
 }

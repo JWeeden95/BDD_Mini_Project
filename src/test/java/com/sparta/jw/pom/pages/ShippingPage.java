@@ -11,10 +11,12 @@ public class ShippingPage extends Page{
         this.webDriver = webDriver;
     }
 
-    public boolean clickConfirmCheckbox() {
+    public void clickConfirmCheckbox() {
         webDriver.findElement(termsOfService).click();
-        return webDriver.findElement(termsOfService).isSelected();
+    }
 
+    public boolean checkConfirmationCheckboxHasBeenTicked() {
+        return webDriver.findElement(termsOfService).isSelected();
     }
 
     public PaymentMethodPage goToPaymentMethodPageFromShippingPage() {
