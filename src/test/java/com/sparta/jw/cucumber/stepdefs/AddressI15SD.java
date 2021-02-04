@@ -12,7 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class addressI15SD {
+public class AddressI15SD {
 
     private static WebDriver webDriver;
     private static AddressPage addressPage;

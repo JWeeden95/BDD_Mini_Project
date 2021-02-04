@@ -1,4 +1,4 @@
-package com.sparta.jw.pom;
+package com.sparta.jw.pom.pagesTest;
 
 import com.sparta.jw.pom.pages.HomePage;
 import com.sparta.jw.pom.pages.SummaryPage;
@@ -25,5 +25,4 @@ public class SummaryPageTester {
         summaryPage.clickProceedToCheckoutAtSummaryPage();
 
     }
-
 }

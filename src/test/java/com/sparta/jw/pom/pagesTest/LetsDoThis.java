@@ -1,4 +1,4 @@
-package com.sparta.jw.pom;
+package com.sparta.jw.pom.pagesTest;
 
 import com.sparta.jw.pom.pages.AddressPage;
 import com.sparta.jw.pom.pages.HomePage;
