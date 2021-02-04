@@ -5,24 +5,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class SummaryPage {
+public class SummaryPage extends Page{
+
     //http://automationpractice.com/index.php?controller=order
-    private static WebDriver webDriver;
-    private static String summaryPageLink = "http://automationpractice.com/index.php?controller=order";
-    public SummaryPage(WebDriver driver) {
-        webDriver = driver;
+    public SummaryPage(WebDriver webDriver) {
+        this.webDriver = webDriver;
     }
 
-
-    public void goToSummaryPage() {
-        webDriver.get(summaryPageLink);
-    }
-
-    public AddressPage goToAddressPage() {
+    public AddressPage goToAddressPageFromSummaryPage() {
         webDriver.findElement(By.linkText("Proceed to checkout")).click();
         return new AddressPage(webDriver);
     }
-    public static boolean correctCartAmountOnTheSummaryPage(int itemCount) {
+    public boolean correctCartAmountOnTheSummaryPage(int itemCount) {
         String total = webDriver.findElement(By.id("summary_products_quantity")).getText();
         String itemCountInString = itemCount + "";
         return total.contains(itemCountInString);

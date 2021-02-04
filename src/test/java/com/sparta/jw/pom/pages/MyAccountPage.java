@@ -3,9 +3,8 @@ package com.sparta.jw.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class MyAccountPage {
+public class MyAccountPage extends Page{
 
-    private WebDriver webDriver;
     By homeIcon = new By.ByClassName("icon-home");
 
     public MyAccountPage(WebDriver webDriver) {

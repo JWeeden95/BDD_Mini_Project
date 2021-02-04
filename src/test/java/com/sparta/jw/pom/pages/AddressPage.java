@@ -7,10 +7,9 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressPage {
+public class AddressPage extends Page{
 
     //http://automationpractice.com/index.php?controller=order&step=1
-    WebDriver webDriver;
     List<String> bAddress = new ArrayList<>();
     List<String> sAddress = new ArrayList<>();
     By comments = new By.ByClassName("form-control");
