@@ -22,7 +22,6 @@ public class AddressStepDes {
     ShippingPage shippingPage;
     SignInPage signInPage;
     MyAccountPage myAccountPage;
-    By comments = new By.ByClassName("form-control");
 
     @Given("that I am on the Address page")
     public void thatIAmOnPage() {
@@ -38,7 +37,6 @@ public class AddressStepDes {
 
     @And("I have left no comment in the comment box")
     public void iHaveLeftNoCommentInTheCommentBox() {
-        webDriver.findElement(comments).sendKeys("Hello World!");
         Assertions.assertTrue(addressPage.isCommentEmpty());
     }
 
