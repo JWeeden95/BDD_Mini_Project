@@ -8,14 +8,14 @@ import org.openqa.selenium.WebDriver;
 public class PaymentMethodPage {
 
     //http://automationpractice.com/index.php?controller=order&multi-shipping=
-    private static WebDriver webDriver;
+    private WebDriver webDriver;
 
     public PaymentMethodPage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
 
-    public static BankWirePaymentPage goToPayByBankWire() {
+    public BankWirePaymentPage goToPayByBankWire() {
         webDriver.findElement(By.className("bankwire")).click();
         return new BankWirePaymentPage(webDriver);
 
@@ -27,7 +27,7 @@ public class PaymentMethodPage {
 //
 //    }
 
-    public static ShippingPage clickContinueShoppingFromPaymentMethodPage() {
+    public ShippingPage clickContinueShoppingFromPaymentMethodPage() {
         webDriver.findElement(By.className("button-exclusive btn btn-default"));
         return new ShippingPage(webDriver);
     }
@@ -35,4 +35,7 @@ public class PaymentMethodPage {
     public String getUrl(){
         return webDriver.getCurrentUrl();
     }
+
 }
+
+
