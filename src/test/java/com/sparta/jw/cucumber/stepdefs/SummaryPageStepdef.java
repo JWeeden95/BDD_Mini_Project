@@ -8,9 +8,10 @@ import org.openqa.selenium.WebDriver;
 
 public class SummaryPageStepdef {
     WebDriver webDriver;
+    String SummaryPageURL;
     @Given("I am on the order summary page")
     public void iAmOnTheOrderSummaryPage() {
-        webDriver.getCurrentUrl();
+        SummaryPageURL = webDriver.getCurrentUrl();
     }
 
     @And("I have {int} item")
@@ -19,11 +20,7 @@ public class SummaryPageStepdef {
 
     @When("I click proceed to checkout from Summary page")
     public void iClickProceedToCheckoutFromSummaryPage() {
-    }
 
-    //The below needs to be replaced by the one above to avoid duplicate error on build
-    @When("I click proceed to checkout")
-    public void iClickProceedToCheckout() {
     }
 
     @Then("Address page appears")

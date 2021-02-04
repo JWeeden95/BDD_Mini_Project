@@ -1,6 +1,5 @@
 package com.sparta.jw.pom;
 
-import com.sparta.jw.pom.pages.HomePage;
 import com.sparta.jw.pom.pages.SummaryPage;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +21,7 @@ public class SummaryPageTester {
     public void clickCheckoutButton(){
         SummaryPage summaryPage = new SummaryPage(webDriver);
         summaryPage.goToSummaryPage("http://automationpractice.com/index.php?controller=order");
-        summaryPage.clickProceedToCheckoutAtSummaryPage();
+        summaryPage.goToAddressPage();
 
     }
 

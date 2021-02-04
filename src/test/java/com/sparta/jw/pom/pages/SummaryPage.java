@@ -18,7 +18,7 @@ public class SummaryPage {
         webDriver.get(link);
     }
 
-    public AddressPage clickProceedToCheckoutAtSummaryPage() {
+    public AddressPage goToAddressPage() {
         webDriver.findElement(By.linkText("Proceed to checkout")).click();
         return new AddressPage(webDriver);
     }
