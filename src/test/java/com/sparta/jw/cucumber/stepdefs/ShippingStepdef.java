@@ -23,7 +23,7 @@ public class ShippingStepdef {
 
     @And("I have ticked the ‘agree to terms of service’ box")
     public void iHaveTickedTheAgreeToTermsOfServiceBox() {
-        shippingPage.clickConfirmCheckbox();
+        Assertions.assertTrue(shippingPage.clickConfirmCheckbox());
     }
 
     @When("I click proceed to checkout from shipping page")

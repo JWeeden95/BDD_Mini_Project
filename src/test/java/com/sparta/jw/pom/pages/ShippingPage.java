@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ShippingPage {
     private WebDriver webDriver;
+    By termsOfService = new By.ById("cgv");
 
     public ShippingPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -14,8 +15,10 @@ public class ShippingPage {
         return webDriver.getCurrentUrl();
     }
 
-    public void clickConfirmCheckbox() {
-        webDriver.findElement(By.id("cgv")).click();
+    public boolean clickConfirmCheckbox() {
+        webDriver.findElement(termsOfService).click();
+        return webDriver.findElement(termsOfService).isSelected();
+
     }
 
     public PaymentMethodPage clickGoToPaymentMethodPage() {
