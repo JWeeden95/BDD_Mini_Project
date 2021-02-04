@@ -5,10 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class PaymentMethodPage {
+public class PaymentMethodPage extends Page{
 
     //http://automationpractice.com/index.php?controller=order&multi-shipping=
-    private WebDriver webDriver;
 
     public PaymentMethodPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -30,10 +29,6 @@ public class PaymentMethodPage {
     public ShippingPage clickContinueShoppingFromPaymentMethodPage() {
         webDriver.findElement(By.className("button-exclusive btn btn-default"));
         return new ShippingPage(webDriver);
-    }
-
-    public String getUrl(){
-        return webDriver.getCurrentUrl();
     }
 
 }

@@ -3,16 +3,12 @@ package com.sparta.jw.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ShippingPage {
-    private WebDriver webDriver;
+public class ShippingPage extends Page{
+
     By termsOfService = new By.ById("cgv");
 
     public ShippingPage(WebDriver webDriver) {
         this.webDriver = webDriver;
-    }
-
-    public String getUrl() {
-        return webDriver.getCurrentUrl();
     }
 
     public boolean clickConfirmCheckbox() {

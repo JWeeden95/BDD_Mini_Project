@@ -7,9 +7,8 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.concurrent.TimeUnit;
 
-public class HomePage {
+public class HomePage extends Page {
 
-    private static WebDriver webDriver;
     By proceedToCheckoutLink = new By.ByClassName("btn btn-default button button-medium");
     By continueShopping = new By.ByCssSelector("#layer_cart > div.clearfix > div.layer_cart_cart.col-xs-12.col-md-6 > div.button-container > span");
     By signIn = new By.ByClassName("login");
@@ -45,7 +44,7 @@ public class HomePage {
         webDriver.findElement(continueShopping).click();
     }
 
-    public SummaryPage goToSummaryPage() {
+    public SummaryPage goToSummaryPageFromHomePage() {
         webDriver.findElement(proceedToCheckoutLink).click();
         return new SummaryPage(webDriver);
     }
@@ -55,9 +54,6 @@ public class HomePage {
         return Integer.parseInt(total) == itemCount;
     }
 
-    public String getUrl(){
-        return webDriver.getCurrentUrl();
-    }
 }
 
 
