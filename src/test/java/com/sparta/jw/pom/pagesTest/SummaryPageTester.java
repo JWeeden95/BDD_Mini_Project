@@ -1,43 +1,61 @@
 package com.sparta.jw.pom.pagesTest;
 
-import com.sparta.jw.pom.pages.SummaryPage;
+import com.sparta.jw.pom.pages.*;
+import io.cucumber.java.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SummaryPageTester {
+
     static WebDriver webDriver;
+    boolean isTheCartAmountCorrect;
+    private HomePage homePage;
 
-    @BeforeEach
-    public void setup() {
-        webDriver = new ChromeDriver();
-    }
+//    @Before
+//    public void setup() {
+//        webDriver = new ChromeDriver();
+//        homePage = new HomePage(webDriver);
+//
+//    }
 
-//    @AfterAll
+
+//    @AfterEach
 //    static void tearDown() {
 //        webDriver.close();
 //    }
 
-//    @Test
-//    @DisplayName("Clicking the proceed to checkout button")
-//    public void clickCheckoutButton(){
-//        SummaryPage summaryPage = new SummaryPage(webDriver);
-//        summaryPage.goToSummaryPage();
-//        summaryPage.goToAddressPage();
-////Write test to test the summary page product counter method
-//
-//
-//    }
-//    @Test
-//    @DisplayName("Testing the cart amount on the cart summary page")
-//    public void cartAmountCheckOnSummaryPage(){
-//        SummaryPage summaryPage = new SummaryPage(webDriver);
-//        summaryPage.goToSummaryPage();
-//        summaryPage.goToAddressPage();
-////Write test to test the summary page product counter method
+    @Test
+    @DisplayName("Clicking the proceed to checkout button")
+    public void clickCheckoutButton() {
+        homePage.goToHomePage();
+        SignInPage signInPage = homePage.goToSignInPageFromHomePage();
+        MyAccountPage myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
+        homePage = myAccountPage.goToHomePageFromMyAccountPage();
+        homePage.addFirstItemToBasket();
+        SummaryPage summaryPage = homePage.goToSummaryPageFromHomePage();
+        Assertions.assertEquals("http://automationpractice.com/index.php?controller=order", webDriver.getCurrentUrl());
+        AddressPage addressPage = summaryPage.goToAddressPageFromSummaryPage();
+        Assertions.assertEquals("http://automationpractice.com/index.php?controller=order&step=1",webDriver.getCurrentUrl());
+    }
 
+    @Test
+    @DisplayName("Testing the cart amount on the cart summary page")
+    public void cartAmountCheckOnSummaryPage() {
+        homePage.goToHomePage();
+        SignInPage signInPage = homePage.goToSignInPageFromHomePage();
+        MyAccountPage myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
+        homePage = myAccountPage.goToHomePageFromMyAccountPage();
+        homePage.addFirstItemToBasket();
+        SummaryPage summaryPage = homePage.goToSummaryPageFromHomePage();
+        Assertions.assertTrue(isTheCartAmountCorrect);
+
+    }
+
+//    @AfterAll
+//    static void afterAll() {
+//        webDriver.quit();
+//    }
 
 }
