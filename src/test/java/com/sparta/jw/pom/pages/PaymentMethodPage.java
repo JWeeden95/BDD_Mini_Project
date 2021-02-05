@@ -13,18 +13,20 @@ public class PaymentMethodPage extends Page{
         this.webDriver = webDriver;
     }
 
+    public String getNavigationPageText(){
+        return webDriver.findElement(By.className("navigation_page")).getText();
+    }
+
 
     public BankWirePaymentPage goToBankWirePaymentPageFromPaymentMethodPage() {
         webDriver.findElement(By.className("bankwire")).click();
         return new BankWirePaymentPage(webDriver);
-
     }
 
-//    public static BankChequePaymentPage goToPayByCheque() {
-//        webDriver.findElement(By.className("cheque")).click();
-//        return new BankChequePaymentPage(webDriver);
-//
-//    }
+    public BankChequePaymentPage goToBankChequePaymentPageFromPaymentMethodPage() {
+        webDriver.findElement(By.className("cheque")).click();
+        return new BankChequePaymentPage(webDriver);
+    }
 
     public ShippingPage clickContinueShoppingFromPaymentMethodPage() {
         webDriver.findElement(By.xpath("//*[@id=\"center_column\"]/div/p/a")).click();
@@ -34,6 +36,21 @@ public class PaymentMethodPage extends Page{
     public ShippingPage goToShippingPageFromPaymentMethodPage() {
         webDriver.findElement(By.xpath("//*[@id=\"order_step\"]/li[4]/a")).click();
         return new ShippingPage(webDriver);
+    }
+
+    public AddressPage goToAddressPageFromPaymentMethodPage() {
+        webDriver.findElement(By.xpath("//*[@id=\"order_step\"]/li[3]/a")).click();
+        return new AddressPage(webDriver);
+    }
+
+    public SummaryPage goToSummaryPageFromPaymentMethodPage() {
+        webDriver.findElement(By.xpath("//*[@id=\"order_step\"]/li[1]/a")).click();
+        return new SummaryPage(webDriver);
+    }
+
+    public HomePage goToHomePageFromPaymentMethodPage(){
+        webDriver.findElement(By.className("icon-home")).click();
+        return new HomePage(webDriver);
     }
 
 }
