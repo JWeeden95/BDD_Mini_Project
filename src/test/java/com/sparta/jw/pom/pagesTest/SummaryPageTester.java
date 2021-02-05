@@ -44,7 +44,7 @@ public class SummaryPageTester {
     }
     @Test
     @DisplayName("Testing the plus button on the summary page")
-    public void testingPlusButtonOnTheSummaryPage(){
+    public void testingPlusButtonOnTheSummaryPage() throws InterruptedException {
         boolean isTheCartAmountCorrect;
         homePage.goToHomePage();
         SignInPage signInPage = homePage.goToSignInPageFromHomePage();

@@ -1,9 +1,6 @@
 package com.sparta.jw.cucumber.stepdefs;
 
-import com.sparta.jw.pom.pages.HomePage;
-import com.sparta.jw.pom.pages.MyAccountPage;
-import com.sparta.jw.pom.pages.SignInPage;
-import com.sparta.jw.pom.pages.SummaryPage;
+import com.sparta.jw.pom.pages.*;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -19,6 +16,7 @@ public class SignInPageStepdefs {
     private HomePage homePage = new HomePage(webDriver);
     private SignInPage signInPage;
     private MyAccountPage myAccountPage;
+    private AuthenticationPage authenticationPage;
 
     @Given("I am on the sign in page")
     public void iAmOnTheSignInPage() {
@@ -28,11 +26,11 @@ public class SignInPageStepdefs {
 
     @And("I have filled in the correct username and password")
     public void iHaveFilledInTheCorrectUsernameAndPassword() {
+        myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
     }
 
     @When("I press enter")
     public void iPressEnter() {
-        myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
     }
 
     @Then("my account page appears")
@@ -41,4 +39,24 @@ public class SignInPageStepdefs {
         webDriver.close();
     }
 
+    @And("I fill in the incorrect username but correct password")
+    public void iFillInTheIncorrectUsernameButCorrectPassword() {
+        authenticationPage = signInPage.goToAuthenticationPageBadEmail();
+    }
+
+    @Then("the authentication page appears")
+    public void theAuthenticationPageAppears() {
+        Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication", authenticationPage.getUrl());
+        webDriver.close();
+    }
+
+    @And("I fill in the correct username but incorrect password")
+    public void iFillInTheCorrectUsernameButIncorrectPassword() {
+        authenticationPage = signInPage.goToAuthenticationPageBadPassword();
+    }
+
+    @And("I fill in the incorrect username and password")
+    public void iFillInTheIncorrectUsernameAndPassword() {
+        authenticationPage = signInPage.goToAuthenticationPageBadEmailAndPassword();
+    }
 }
