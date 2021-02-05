@@ -4,6 +4,7 @@ import com.sparta.jw.pom.pages.HomePage;
 import com.sparta.jw.pom.pages.MyAccountPage;
 import com.sparta.jw.pom.pages.SignInPage;
 import com.sparta.jw.pom.pages.SummaryPage;
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -33,5 +34,7 @@ public class MyAccountStepdefs {
     @Then("the home page appears")
     public void theHomePageAppears() {
         Assertions.assertEquals("http://automationpractice.com/index.php", homePage.getUrl());
+        webDriver.close();
     }
+
 }

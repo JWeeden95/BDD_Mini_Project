@@ -1,6 +1,7 @@
 package com.sparta.jw.cucumber.stepdefs;
 
 import com.sparta.jw.pom.pages.*;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -11,17 +12,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ShippingStepdef {
-    private static WebDriver webDriver = new ChromeDriver();
-    private HomePage homePage = new HomePage(webDriver);
-    private SignInPage signInPage;
-    private MyAccountPage myAccountPage;
-    private SummaryPage summaryPage;
-    private AddressPage addressPage;
-    private ShippingPage shippingPage;
-    private PaymentMethodPage paymentMethodPage;
+    static WebDriver webDriver = new ChromeDriver();
+    HomePage homePage;
+    SignInPage signInPage;
+    MyAccountPage myAccountPage;
+    SummaryPage summaryPage;
+    AddressPage addressPage;
+    ShippingPage shippingPage;
+    PaymentMethodPage paymentMethodPage;
 
     @Given("that I am on the shipping page")
     public void thatIAmOnTheShippingPage() {
+        homePage = new HomePage(webDriver);
         homePage.goToHomePage();
         signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
@@ -32,8 +34,8 @@ public class ShippingStepdef {
         shippingPage = addressPage.goToShippingPageFromAddressPage();
     }
 
-    @And("I have ticked the ‘agree to terms of service’ box")
-    public void iHaveTickedTheAgreeToTermsOfServiceBox() {
+    @And("I have clicked the agree to terms of service box")
+    public void iHaveClickedTheAgreeToTermsOfServiceBox() {
         shippingPage.clickConfirmCheckbox();
     }
 
@@ -42,9 +44,24 @@ public class ShippingStepdef {
         paymentMethodPage = shippingPage.goToPaymentMethodPageFromShippingPage();
     }
 
-    @Then("the Payment page appears")
-    public void thePaymentPageAppears() {
+    @Then("confirm I am on the payment confirmation page")
+    public void confirmIAmOnThePaymentConfirmationPage() {
         Assertions.assertTrue(paymentMethodPage.getPageAsString().contains("Pay by bank wire"));
+        webDriver.close();
     }
+
+
+
+    @When("I click the agree to terms of service box")
+    public void iClickTheAgreeToTermsOfServiceBox() {
+        shippingPage.clickConfirmCheckbox();
+    }
+
+    @Then("the agree to terms of service box should be ticked")
+    public void theAgreeToTermsOfServiceBoxShouldBeTicked() {
+        Assertions.assertTrue(shippingPage.checkConfirmationCheckboxHasBeenTicked());
+        webDriver.close();
+    }
+
 
 }

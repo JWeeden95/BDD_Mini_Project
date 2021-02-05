@@ -3,6 +3,7 @@ package com.sparta.jw.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class AddressPage extends Page{
 
@@ -17,7 +19,8 @@ public class AddressPage extends Page{
 
     private static final Properties properties = new Properties();
     private static final String PROPERTIES_PATH = "src/test/resources/userDetails.properties";
-    List<String> bAddress = new ArrayList<>();
+    By clickEqualAddress = new By.ById("addressesAreEquals");
+    List<String> bAddress;
     List<String> sAddress = new ArrayList<>();
     List<String> actualBillingAddress = new ArrayList<>();
     By comments = new By.ByClassName("form-control");
@@ -57,6 +60,7 @@ public class AddressPage extends Page{
 
     public List<String> getBillingAddress()
     {
+        bAddress = new ArrayList<>();
         String string = webDriver.findElement(By.cssSelector("#address_invoice")).getText();
         bAddress.addAll(Arrays.asList(string.split("([\n]|[,])")));
         bAddress.remove(0);
@@ -72,13 +76,13 @@ public class AddressPage extends Page{
 
     public boolean IsBillingAddressAndMyAddressTheSame(List<String> myAdd)
     {
-        boolean isSame = false;
+        boolean isSame = true;
         getBillingAddress();
         for(int i = 0; i < bAddress.size(); i++)
         {
-            if(myAdd.get(i).equals(bAddress.get(i)))
+            if(!myAdd.get(i).equals(bAddress.get(i)))
             {
-                isSame = true;
+                isSame = false;
             }
         }
         return isSame;
@@ -89,4 +93,27 @@ public class AddressPage extends Page{
         webDriver.findElement(By.name("processAddress")).click();
         return new ShippingPage(webDriver);
     }
+
+    public void switchOfSameAddress()
+    {
+        webDriver.findElement(clickEqualAddress).click();
+    }
+
+    public void changeBothAddressIfTheyArentDifferent()
+    {
+        webDriver.findElement(By.className("selector")).click();
+        webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
+    }
+
+    public void changeShippingAddress()
+    {
+        webDriver.findElement(By.className("selector")).click();
+        webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
+    }
+
+    public boolean addressIsShipping()
+    {
+        return webDriver.findElement(clickEqualAddress).isSelected();
+    }
+
 }
