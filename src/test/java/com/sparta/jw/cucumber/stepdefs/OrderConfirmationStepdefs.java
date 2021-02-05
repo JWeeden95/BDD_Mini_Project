@@ -39,7 +39,7 @@ public class OrderConfirmationStepdefs {
 
     @When("I click confirm order")
     public void iClickConfirmOrder() {
-        paymentConfirmationPage = bankWirePaymentPage.goToPaymentConfirmationPage();
+        paymentConfirmationPage = bankWirePaymentPage.goToPaymentConfirmationPageFromBankWirePaymentPage();
     }
 
     @Then("the order confirmation page appears")
@@ -49,7 +49,7 @@ public class OrderConfirmationStepdefs {
 
     @When("I click other payment methods")
     public void iClickOtherPaymentMethods() {
-        paymentMethodPage = bankWirePaymentPage.goBackToPaymentMethodPage();
+        paymentMethodPage = bankWirePaymentPage.goBackToPaymentMethodPageFromBankWirePaymentPage();
     }
 
     @Then("payment method page appears when coming from bank wire payment page")
