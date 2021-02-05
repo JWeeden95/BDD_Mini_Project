@@ -85,4 +85,23 @@ public class ShippingStepdef {
     public void iGoToTheAddressPage() {
         Assertions.assertTrue(addressPage.getPageAsString().contains("Choose a delivery address:"));
     }
+
+    @Given("I am on the shipping page again")
+    public void iAmOnTheShippingPageAgain() {
+        homePage = new HomePage(webDriver);
+        homePage.addFirstItemToBasket();
+        summaryPage = homePage.goToSummaryPageFromHomePage();
+        addressPage = summaryPage.goToAddressPageFromSummaryPage();
+        shippingPage = addressPage.goToShippingPageFromAddressPage();
+    }
+
+    @When("I click the home icon on shipping page")
+    public void iClickTheHomeIconOnShippingPage() {
+        homePage = shippingPage.goToHomePageFromShippingPage();
+    }
+
+    @Then("I go to the home page")
+    public void iGoToTheHomePage() {
+        Assertions.assertEquals("http://automationpractice.com/index.php",homePage.getUrl());
+    }
 }
