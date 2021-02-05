@@ -15,13 +15,11 @@ import java.util.concurrent.TimeUnit;
 
 public class AddressPage extends Page{
 
-    //http://automationpractice.com/index.php?controller=order&step=1
-
     private static final Properties properties = new Properties();
     private static final String PROPERTIES_PATH = "src/test/resources/userDetails.properties";
     By clickEqualAddress = new By.ById("addressesAreEquals");
     List<String> bAddress;
-    List<String> sAddress = new ArrayList<>();
+    List<String> sAddress;
     List<String> actualBillingAddress = new ArrayList<>();
     By comments = new By.ByClassName("form-control");
 
@@ -51,6 +49,7 @@ public class AddressPage extends Page{
 
     public List<String> getShippingAddress()
     {
+        sAddress = new ArrayList<>();
         String string = webDriver.findElement(By.cssSelector("#address_delivery")).getText();
         sAddress.addAll(Arrays.asList(string.split("([\n]|[,])")));
         sAddress.remove(0);
@@ -74,7 +73,7 @@ public class AddressPage extends Page{
         actualBillingAddress.addAll(Arrays.asList(address.split(",")));
     }
 
-    public boolean IsBillingAddressAndMyAddressTheSame(List<String> myAdd)
+    public boolean isBillingAddressAndMyAddressTheSame(List<String> myAdd)
     {
         boolean isSame = true;
         getBillingAddress();
@@ -94,18 +93,24 @@ public class AddressPage extends Page{
         return new ShippingPage(webDriver);
     }
 
-    public void switchOfSameAddress()
+    public void switchOffSameAddress()
     {
         webDriver.findElement(clickEqualAddress).click();
     }
 
     public void changeBothAddressIfTheyArentDifferent()
     {
-        webDriver.findElement(By.className("selector")).click();
+        webDriver.findElement(By.id("uniform-id_address_delivery")).click();
         webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
     }
 
     public void changeShippingAddress()
+    {
+        webDriver.findElement(By.id("uniform-id_address_invoice")).click();
+        webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
+    }
+
+    public void changeBillingAddress()
     {
         webDriver.findElement(By.className("selector")).click();
         webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
