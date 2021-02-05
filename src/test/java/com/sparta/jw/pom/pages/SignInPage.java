@@ -9,9 +9,14 @@ public class SignInPage extends Page{
 
     By email = new By.ById("email");
     By password = new By.ById("passwd");
+    By orderStepBar = new By.ById("order_step");
 
     public SignInPage(WebDriver webDriver) {
         this.webDriver = webDriver;
+    }
+
+    public boolean hasOrderStepBar(){
+        return webDriver.findElement(orderStepBar).isDisplayed();
     }
 
     public MyAccountPage goToMyAccountPageFromSignInPage(){
