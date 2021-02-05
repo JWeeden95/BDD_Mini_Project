@@ -11,8 +11,6 @@ public class HomePage extends Page {
 
     By proceedToCheckoutLink = new By.ByCssSelector("#layer_cart > div.clearfix > div.layer_cart_cart.col-xs-12.col-md-6 > div.button-container > a");
     By continueShopping = new By.ByCssSelector("#layer_cart > div.clearfix > div.layer_cart_cart.col-xs-12.col-md-6 > div.button-container > span");
-    By cartDropdown = new By.ByCssSelector("#header > div:nth-child(3) > div > div > div:nth-child(3) > div > a");
-    By proceedToCheckoutLinkAlternative = new By.ByClassName("cart-buttons");
     By signIn = new By.ByClassName("login");
 
     public HomePage(WebDriver driver) {
@@ -53,14 +51,6 @@ public class HomePage extends Page {
     public SummaryPage goToSummaryPageFromHomePage() {
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(proceedToCheckoutLink).click();
-        return new SummaryPage(webDriver);
-    }
-
-    public SummaryPage goToSummaryPageFromHomePageAlternative() {
-        Actions actions = new Actions(webDriver);
-        actions.moveToElement(webDriver.findElement(cartDropdown)).perform();
-        webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        webDriver.findElement(proceedToCheckoutLinkAlternative).click();
         return new SummaryPage(webDriver);
     }
 

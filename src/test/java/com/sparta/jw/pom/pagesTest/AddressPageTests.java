@@ -2,6 +2,7 @@ package com.sparta.jw.pom.pagesTest;
 
 import com.sparta.jw.pom.pages.*;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,10 +12,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class AddressPageTests {
 
     WebDriver webDriver = new ChromeDriver();
+    List<String> billing;
     HomePage homePage;
     SummaryPage summaryPage;
     SignInPage signInPage;
@@ -23,23 +26,50 @@ public class AddressPageTests {
     private static final Properties properties = new Properties();
     private static final String PROPERTIES_PATH = "src/test/resources/userDetails.properties";
 
-    @Test
-    public void runAll(){
+    @BeforeEach
+    public void setUp(){
 
         createProperties();
-//        First need to go to home page
-//                - Homepage object
         homePage = new HomePage(webDriver);
-
         addToBasket();
         setSummaryPage();
         setSignInPage();
         Assertions.assertTrue(addressPage.isCommentEmpty());
-        //setShippingPage();
-        //Assertions.assertTrue(webDriver.findElement(By.className("page-heading")).getText().contains("SHIPPING"));
-        List<String> billing = addressPage.getActualBillingAddress();
-        Assertions.assertTrue(addressPage.IsBillingAddressAndMyAddressTheSame(billing));
-        addressPage.changeBothAddressIfTheyArentDifferent();
+        billing = addressPage.getActualBillingAddress();
+    }
+
+    @Test
+    public void checkAddressIsActual()
+    {
+        Assertions.assertTrue(addressPage.isBillingAddressAndMyAddressTheSame());
+    }
+
+    @Test
+    public void changeAddress()
+    {
+        addressPage.changeBothAddress();
+        Assertions.assertFalse(addressPage.isBillingAddressAndMyAddressTheSame());
+    }
+
+    @Test
+    public void billingChange()
+    {
+        changeOnlyShipping();
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        addressPage.changeBillingAddress(2);
+        Assertions.assertTrue(addressPage.isBillingAddressAndMyAddressTheSame());
+    }
+
+    public void changeOnlyShipping()
+    {
+        addressPage.switchOffSameAddress();
+    }
+
+    @Test
+    public void getToShipping()
+    {
+        setShippingPage();
+        Assertions.assertTrue(webDriver.findElement(By.className("page-heading")).getText().contains("SHIPPING"));
     }
 
     public void addToBasket()

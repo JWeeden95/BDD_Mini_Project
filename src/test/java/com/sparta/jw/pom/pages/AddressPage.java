@@ -15,25 +15,83 @@ import java.util.concurrent.TimeUnit;
 
 public class AddressPage extends Page{
 
-    //http://automationpractice.com/index.php?controller=order&step=1
-
     private static final Properties properties = new Properties();
     private static final String PROPERTIES_PATH = "src/test/resources/userDetails.properties";
     By clickEqualAddress = new By.ById("addressesAreEquals");
-    List<String> bAddress = new ArrayList<>();
-    List<String> sAddress = new ArrayList<>();
+    List<String> bAddress;
+    List<String> sAddress;
     List<String> actualBillingAddress = new ArrayList<>();
+    List<String> addressTwo = new ArrayList<>();
     By comments = new By.ByClassName("form-control");
-
-    public List<String> getActualBillingAddress() {
-        return actualBillingAddress;
-    }
 
     public AddressPage(WebDriver webDriver)
     {
         createProperties();
         setActualBillingAddress();
+        setAddressTwo();
         this.webDriver = webDriver;
+    }
+
+    public boolean isCommentEmpty()
+    {
+        return webDriver.findElement(comments).getText().equals("") || webDriver.findElement(comments) == null;
+    }
+
+    public boolean isBillingAddressAndMyAddressTheSame()
+    {
+        getBillingAddress();
+        getShippingAddress();
+        return bAddress.equals(sAddress);
+    }
+
+    public ShippingPage goToShippingPageFromAddressPage()
+    {
+        webDriver.findElement(By.name("processAddress")).click();
+        return new ShippingPage(webDriver);
+    }
+
+    public void switchOffSameAddress()
+    {
+        webDriver.findElement(clickEqualAddress).click();
+    }
+
+    public void changeBothAddress()
+    {
+        webDriver.findElement(By.id("uniform-id_address_delivery")).click();
+        webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
+    }
+
+    public void changeShippingAddress(int address)
+    {
+        webDriver.findElement(By.id("id_address_delivery")).click();
+        switch(address)
+        {
+            case 1:
+                webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(1)")).click();
+                break;
+            case 2:
+                webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
+                break;
+        }
+    }
+
+    public void changeBillingAddress(int address)
+    {
+        webDriver.findElement(By.id("uniform-id_address_invoice")).click();
+        switch(address)
+        {
+            case 1:
+                webDriver.findElement(By.cssSelector("#id_address_invoice > option:nth-child(1)")).click();
+                break;
+            case 2:
+                webDriver.findElement(By.cssSelector("#id_address_invoice > option:nth-child(2)")).click();
+                break;
+        }
+    }
+
+    public boolean addressIsShipping()
+    {
+        return webDriver.findElement(clickEqualAddress).isSelected();
     }
 
     private static void createProperties() {
@@ -44,13 +102,22 @@ public class AddressPage extends Page{
         }
     }
 
-    public boolean isCommentEmpty()
-    {
-        return webDriver.findElement(comments).getText().equals("") || webDriver.findElement(comments) == null;
+    public List<String> getAddressTwo() {
+        return addressTwo;
+    }
+
+    public void setAddressTwo() {
+        String address2 = properties.getProperty("address");
+        addressTwo.addAll(Arrays.asList(address2.split(",")));
+    }
+
+    public List<String> getActualBillingAddress() {
+        return actualBillingAddress;
     }
 
     public List<String> getShippingAddress()
     {
+        sAddress = new ArrayList<>();
         String string = webDriver.findElement(By.cssSelector("#address_delivery")).getText();
         sAddress.addAll(Arrays.asList(string.split("([\n]|[,])")));
         sAddress.remove(0);
@@ -60,6 +127,7 @@ public class AddressPage extends Page{
 
     public List<String> getBillingAddress()
     {
+        bAddress = new ArrayList<>();
         String string = webDriver.findElement(By.cssSelector("#address_invoice")).getText();
         bAddress.addAll(Arrays.asList(string.split("([\n]|[,])")));
         bAddress.remove(0);
@@ -73,38 +141,5 @@ public class AddressPage extends Page{
         actualBillingAddress.addAll(Arrays.asList(address.split(",")));
     }
 
-    public boolean IsBillingAddressAndMyAddressTheSame(List<String> myAdd)
-    {
-        boolean isSame = false;
-        getBillingAddress();
-        for(int i = 0; i < bAddress.size(); i++)
-        {
-            if(myAdd.get(i).equals(bAddress.get(i)))
-            {
-                isSame = true;
-            }
-        }
-        return isSame;
-    }
 
-    public ShippingPage goToShippingPageFromAddressPage()
-    {
-        webDriver.findElement(By.name("processAddress")).click();
-        return new ShippingPage(webDriver);
-    }
-
-    public void makeAddressNotShipping()
-    {
-        webDriver.findElement(clickEqualAddress).click();
-    }
-
-    public void changeBothAddressIfTheyArentDifferent()
-    {
-        Actions actions = new Actions(webDriver);
-        webDriver.findElement(By.className("selector")).click();
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(1)")).click();
-    }
 }

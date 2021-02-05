@@ -7,7 +7,7 @@ public class BankWirePaymentPage extends Page{
 
     //http://automationpractice.com/index.php?fc=module&module=bankwire&controller=payment
     By confirmOrder = new By.ByXPath("//*[@id=\"cart_navigation\"]/button");
-    By goBackToPaymentPage = new By.ByClassName("button-exclusive btn btn-default");
+    By goBackToPaymentPage = new By.ByXPath("//*[@id=\"cart_navigation\"]/a");
 
 
     public BankWirePaymentPage(WebDriver driver) {

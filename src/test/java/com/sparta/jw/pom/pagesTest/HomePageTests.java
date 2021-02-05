@@ -48,7 +48,14 @@ public class HomePageTests {
         homePage.goToHomePage();
         homePage.addFirstItemToBasket();
         homePage.clickContinueShopping();
-        homePage.goToSummaryPageFromHomePageAlternative();
+        homePage.goToSummaryPageByClickingShoppingCart();
+    }
+
+    @Test
+    @DisplayName("Clicking shopping cart goes to summary page")
+    void clickingShoppingCartGoesToSummaryPage() {
+        homePage.goToHomePage();
+        homePage.goToSummaryPageByClickingShoppingCart();
     }
 
 //    @Test

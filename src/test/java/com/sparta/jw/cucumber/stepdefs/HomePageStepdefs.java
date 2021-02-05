@@ -60,9 +60,9 @@ public class HomePageStepdefs {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=order", summaryPage.getUrl());
     }
 
-    @After
-    public void tearDown(){
-        webDriver.close();
-        webDriver.quit();
-    }
+//    @After
+//    public void tearDown(){
+//        webDriver.close();
+//        webDriver.quit();
+//    }
 }
