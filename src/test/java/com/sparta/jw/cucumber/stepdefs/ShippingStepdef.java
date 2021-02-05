@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -21,21 +22,16 @@ public class ShippingStepdef {
     ShippingPage shippingPage;
     PaymentMethodPage paymentMethodPage;
 
-    @Given("that I am on the shipping page")
-    public void thatIAmOnTheShippingPage() {
+    @Given("that I am on the shipping page and checkbox is checked")
+    public void thatIAmOnTheShippingPageAndCheckboxIsChecked() {
         homePage = new HomePage(webDriver);
-        homePage.goToHomePage();
         signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
-        homePage = myAccountPage.goToHomePageFromMyAccountPage();
+        myAccountPage.goToHomePageFromMyAccountPage();
         homePage.addFirstItemToBasket();
         summaryPage = homePage.goToSummaryPageFromHomePage();
         addressPage = summaryPage.goToAddressPageFromSummaryPage();
         shippingPage = addressPage.goToShippingPageFromAddressPage();
-    }
-
-    @And("I have clicked the agree to terms of service box")
-    public void iHaveClickedTheAgreeToTermsOfServiceBox() {
         shippingPage.clickConfirmCheckbox();
     }
 
@@ -47,10 +43,17 @@ public class ShippingStepdef {
     @Then("confirm I am on the payment confirmation page")
     public void confirmIAmOnThePaymentConfirmationPage() {
         Assertions.assertTrue(paymentMethodPage.getPageAsString().contains("Pay by bank wire"));
-        webDriver.close();
     }
 
 
+    @Given("that I am on the shipping page")
+    public void thatIAmOnTheShippingPage() {
+        homePage = new HomePage(webDriver);
+        homePage.addFirstItemToBasket();
+        summaryPage = homePage.goToSummaryPageFromHomePage();
+        addressPage = summaryPage.goToAddressPageFromSummaryPage();
+        shippingPage = addressPage.goToShippingPageFromAddressPage();
+    }
 
     @When("I click the agree to terms of service box")
     public void iClickTheAgreeToTermsOfServiceBox() {
@@ -60,8 +63,26 @@ public class ShippingStepdef {
     @Then("the agree to terms of service box should be ticked")
     public void theAgreeToTermsOfServiceBoxShouldBeTicked() {
         Assertions.assertTrue(shippingPage.checkConfirmationCheckboxHasBeenTicked());
-        webDriver.close();
+//        webDriver.close();
     }
 
 
+    @Given("that I am still on the shipping page")
+    public void thatIAmStillOnTheShippingPage() {
+        homePage = new HomePage(webDriver);
+        homePage.addFirstItemToBasket();
+        summaryPage = homePage.goToSummaryPageFromHomePage();
+        addressPage = summaryPage.goToAddressPageFromSummaryPage();
+        shippingPage = addressPage.goToShippingPageFromAddressPage();
+    }
+
+    @When("I click the Continue shopping button")
+    public void iClickTheContinueShoppingButton() {
+        addressPage = shippingPage.goToAddressPageFromShippingPage();
+    }
+
+    @Then("I go to the address page")
+    public void iGoToTheAddressPage() {
+        Assertions.assertTrue(addressPage.getPageAsString().contains("Choose a delivery address:"));
+    }
 }

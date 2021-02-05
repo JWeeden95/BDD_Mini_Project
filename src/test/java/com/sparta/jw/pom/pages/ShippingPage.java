@@ -24,6 +24,10 @@ public class ShippingPage extends Page{
         return new PaymentMethodPage(webDriver);
     }
 
+    public AddressPage goToAddressPageFromShippingPage() {
+        webDriver.findElement(By.xpath("//*[@id=\"form\"]/p/a")).click();
+        return new AddressPage(webDriver);
+    }
 
 
     //http://automationpractice.com/index.php?controller=order

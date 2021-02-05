@@ -1,8 +1,7 @@
 Feature: Shipping confirmation
 
   Scenario:
-    Given that I am on the shipping page
-    And I have clicked the agree to terms of service box
+    Given that I am on the shipping page and checkbox is checked
 #    When I click proceed to checkout from shipping page
 #   needs to change to the above to avoid duplication issue (JF)
     When I click proceed to checkout from shipping page
@@ -12,3 +11,8 @@ Feature: Shipping confirmation
     Given that I am on the shipping page
     When I click the agree to terms of service box
     Then the agree to terms of service box should be ticked
+
+  Scenario:
+    Given that I am still on the shipping page
+    When I click the Continue shopping button
+    Then I go to the address page
