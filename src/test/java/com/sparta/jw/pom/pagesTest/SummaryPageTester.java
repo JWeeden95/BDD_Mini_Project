@@ -17,7 +17,7 @@ public class SummaryPageTester {
 
     WebDriver webDriver = new ChromeDriver();
     private HomePage homePage = new HomePage(webDriver);
-    WebDriverWait wait = new WebDriverWait(webDriver,30);
+    WebDriverWait wait = new WebDriverWait(webDriver, 30);
 
     @Test
     @DisplayName("Clicking the proceed to checkout button")
@@ -30,7 +30,7 @@ public class SummaryPageTester {
         SummaryPage summaryPage = homePage.goToSummaryPageFromHomePage();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=order", webDriver.getCurrentUrl());
         AddressPage addressPage = summaryPage.goToAddressPageFromSummaryPage();
-        Assertions.assertEquals("http://automationpractice.com/index.php?controller=order&step=1",webDriver.getCurrentUrl());
+        Assertions.assertEquals("http://automationpractice.com/index.php?controller=order&step=1", webDriver.getCurrentUrl());
         webDriver.close();
     }
 
@@ -48,6 +48,7 @@ public class SummaryPageTester {
         Assertions.assertTrue(isTheCartAmountCorrect);
         webDriver.close();
     }
+
     @Test
     @DisplayName("Testing the plus button on the summary page")
     public void testingPlusButtonOnTheSummaryPage() throws InterruptedException {
@@ -65,4 +66,22 @@ public class SummaryPageTester {
         webDriver.close();
     }
 
+    @Test
+    @DisplayName("Testing the plus button on the summary page")
+    public void testingMinusButtonOnTheSummaryPage() throws InterruptedException {
+        boolean isTheCartAmountCorrect;
+        homePage.goToHomePage();
+        SignInPage signInPage = homePage.goToSignInPageFromHomePage();
+        MyAccountPage myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
+        homePage = myAccountPage.goToHomePageFromMyAccountPage();
+        homePage.addFirstItemToBasket();
+        SummaryPage summaryPage = homePage.goToSummaryPageFromHomePage();
+        summaryPage.clickPlusButtonMultiTimesOnTheSummaryPage(1);
+        Thread.sleep(2000);
+        summaryPage.clickMinusButtonOnTheSummaryPage();
+        Thread.sleep(2000);
+        isTheCartAmountCorrect = summaryPage.correctCartAmountOnTheSummaryPage(1);
+        Assertions.assertTrue(isTheCartAmountCorrect);
+        webDriver.close();
+    }
 }

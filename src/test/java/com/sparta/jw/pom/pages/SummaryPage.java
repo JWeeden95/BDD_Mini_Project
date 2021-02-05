@@ -25,6 +25,16 @@ public class SummaryPage extends Page{
     public void clickMinusButtonOnTheSummaryPage(){
         webDriver.findElement(By.className("icon-minus")).click();
     }
+    public void clickMinusButtonMultiTimesOnTheSummaryPage(int number){
+        for (int i = 0;i<number;i++) {
+            webDriver.findElement(By.className("icon-minus")).click();
+        }
+    }
+    public void clickPlusButtonMultiTimesOnTheSummaryPage(int number){
+        for (int i = 0;i<number;i++) {
+            webDriver.findElement(By.className("icon-plus")).click();
+        }
+    }
 
     //Added by me for testing on LetsDoThis class, remove if you need to (JF)
     public WebDriver clickProceedToCheckoutAtSummaryPageNoSignIn() {
