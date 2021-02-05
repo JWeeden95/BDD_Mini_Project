@@ -4,6 +4,7 @@ import com.sparta.jw.pom.pages.HomePage;
 import com.sparta.jw.pom.pages.MyAccountPage;
 import com.sparta.jw.pom.pages.SignInPage;
 import com.sparta.jw.pom.pages.SummaryPage;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -37,5 +38,11 @@ public class SignInPageStepdefs {
     @Then("my account page appears")
     public void myAccountPageAppears() {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=my-account", myAccountPage.getUrl());
+    }
+
+    @After
+    public void tearDown(){
+        webDriver.close();
+        webDriver.quit();
     }
 }
