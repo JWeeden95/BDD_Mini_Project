@@ -12,17 +12,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ShippingStepdef {
-    private static WebDriver webDriver = new ChromeDriver();
-    private HomePage homePage = new HomePage(webDriver);
-    private SignInPage signInPage;
-    private MyAccountPage myAccountPage;
-    private SummaryPage summaryPage;
-    private AddressPage addressPage;
-    private ShippingPage shippingPage;
-    private PaymentMethodPage paymentMethodPage;
+    static WebDriver webDriver = new ChromeDriver();
+    HomePage homePage;
+    SignInPage signInPage;
+    MyAccountPage myAccountPage;
+    SummaryPage summaryPage;
+    AddressPage addressPage;
+    ShippingPage shippingPage;
+    PaymentMethodPage paymentMethodPage;
 
     @Given("that I am on the shipping page")
     public void thatIAmOnTheShippingPage() {
+        homePage = new HomePage(webDriver);
         homePage.goToHomePage();
         signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
