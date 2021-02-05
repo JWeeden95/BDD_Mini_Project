@@ -41,14 +41,14 @@ public class AddressPageTests {
     @Test
     public void checkAddressIsActual()
     {
-        Assertions.assertTrue(addressPage.isBillingAddressAndMyAddressTheSame(billing));
+        Assertions.assertTrue(addressPage.isBillingAddressAndMyAddressTheSame());
     }
 
     @Test
     public void changeAddress()
     {
-        addressPage.changeBothAddressIfTheyArentDifferent();
-        Assertions.assertFalse(addressPage.isBillingAddressAndMyAddressTheSame(billing));
+        addressPage.changeBothAddress();
+        Assertions.assertFalse(addressPage.isBillingAddressAndMyAddressTheSame());
     }
 
     @Test
@@ -56,8 +56,8 @@ public class AddressPageTests {
     {
         changeOnlyShipping();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        addressPage.changeBillingAddress();
-        Assertions.assertFalse(addressPage.isBillingAddressAndMyAddressTheSame(billing));
+        addressPage.changeBillingAddress(2);
+        Assertions.assertTrue(addressPage.isBillingAddressAndMyAddressTheSame());
     }
 
     public void changeOnlyShipping()

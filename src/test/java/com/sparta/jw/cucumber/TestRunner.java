@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions
         (
+                tags = "@shippingChangeOnly",
                 features = {"src/test/resources/features"},
                 plugin = "pretty"
         )
