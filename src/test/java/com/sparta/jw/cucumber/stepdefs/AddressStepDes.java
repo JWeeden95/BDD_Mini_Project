@@ -42,8 +42,7 @@ public class AddressStepDes {
 
     @And("my billing information is correct")
     public void myBillingInformationIsCorrect() {
-        List<String> billing = addressPage.getActualBillingAddress();
-        Assertions.assertTrue(addressPage.isBillingAddressAndMyAddressTheSame(billing));
+        Assertions.assertTrue(addressPage.isBillingAddressAndMyAddressTheSame());
     }
 
     @When("I click proceed to checkout from address page")
@@ -59,7 +58,6 @@ public class AddressStepDes {
     @Given("that I am on the Address page for Change")
     public void thatIAmOnTheAddressPageForChange() {
         homePage = new HomePage(webDriver);
-        homePage.goToHomePage();
         webDriver.findElement(By.className("logout")).click();
         signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
@@ -76,20 +74,18 @@ public class AddressStepDes {
 
     @When("I change my address")
     public void iChangeMyAddress() {
-        addressPage.changeBothAddressIfTheyArentDifferent();
+        addressPage.changeBothAddress();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @Then("My address for both billing and shipping changed to selected")
     public void myAddressForBothBillingAndShippingChangedToSelected() {
-        List<String> storedAdd = addressPage.getActualBillingAddress();
-        Assertions.assertFalse(addressPage.isBillingAddressAndMyAddressTheSame(storedAdd));
+        Assertions.assertTrue(addressPage.isBillingAddressAndMyAddressTheSame());
     }
 
     @Given("that I am on the Address page to change just shipping address")
     public void thatIAmOnTheAddressPageToChangeJustShippingAddress() {
         homePage = new HomePage(webDriver);
-        homePage.goToHomePage();
         webDriver.findElement(By.className("logout")).click();
         signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
@@ -106,12 +102,38 @@ public class AddressStepDes {
 
     @When("I change my shipping address")
     public void iChangeMyShippingAddress() {
-        addressPage.changeShippingAddress();
+        addressPage.changeShippingAddress(1);
     }
 
     @Then("I will have a different shipping address")
     public void iWillHaveADifferentShippingAddress() {
-        List<String> storeAdd = addressPage.getActualBillingAddress();
-        Assertions.assertFalse(addressPage.isBillingAddressAndMyAddressTheSame(storeAdd));
+        Assertions.assertFalse(addressPage.isBillingAddressAndMyAddressTheSame());
+    }
+
+    @Given("I am signed in on the address page")
+    public void iAmSignedInOnTheAddressPage() {
+        homePage = new HomePage(webDriver);
+        webDriver.findElement(By.className("logout")).click();
+        signInPage = homePage.goToSignInPageFromHomePage();
+        myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
+        myAccountPage.goToHomePageFromMyAccountPage();
+        homePage.addFirstItemToBasket();
+        summaryPage = homePage.goToSummaryPageFromHomePage();
+        addressPage = summaryPage.goToAddressPageFromSummaryPage();
+    }
+
+    @And("My shipping Address is my Billing Address button unchecked")
+    public void myShippingAddressIsMyBillingAddressButtonUnchecked() {
+        addressPage.switchOffSameAddress();
+    }
+
+    @When("I change my billing address")
+    public void iChangeMyBillingAddressToAddressTwo() {
+        addressPage.changeBillingAddress(1);
+    }
+
+    @Then("My billing address doesn't change")
+    public void myBillingAddressDoesntChange() {
+        Assertions.assertFalse(addressPage.isBillingAddressAndMyAddressTheSame());
     }
 }

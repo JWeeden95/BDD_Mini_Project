@@ -19,9 +19,18 @@ Feature: Address page functionality
       When I change my address
       Then My address for both billing and shipping changed to selected
 
+      @shippingAddressOnlyChange
       Scenario: Make shipping address different from billing
         Given that I am on the Address page to change just shipping address
         And I have left no comment in the comment box
         And My shipping Address isn't my billing address
         When I change my shipping address
         Then I will have a different shipping address
+
+        @billingChangeOnly
+        Scenario: Change just the billing address
+          Given I am signed in on the address page
+          And My shipping Address is my Billing Address button unchecked
+          When I change my billing address
+          Then My billing address doesn't change
+
