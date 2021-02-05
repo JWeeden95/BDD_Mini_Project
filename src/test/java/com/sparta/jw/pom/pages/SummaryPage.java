@@ -1,7 +1,5 @@
 package com.sparta.jw.pom.pages;
 
-import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,6 +18,9 @@ public class SummaryPage extends Page{
         String total = webDriver.findElement(By.id("summary_products_quantity")).getText();
         String itemCountInString = itemCount + "";
         return total.contains(itemCountInString);
+    }
+    public void clickPlusButtonOnTheSummaryPage(){
+        webDriver.findElement(By.className("icon-plus")).click();
     }
 
     //Added by me for testing on LetsDoThis class, remove if you need to (JF)
