@@ -19,6 +19,7 @@ public class PaymentMethodPageStepDefs {
     private ShippingPage shippingPage;
     private PaymentMethodPage paymentMethodPage;
     private BankWirePaymentPage bankWirePaymentPage;
+    private BankChequePaymentPage bankChequePaymentPage;
 
     @Given("I am on the Payment Method Page")
     public void iAmOnThePaymentMethodPage() {
@@ -88,5 +89,15 @@ public class PaymentMethodPageStepDefs {
     @Then("The user is sent back to the Home Page from the Payment Method Page")
     public void theUserIsSentBackToTheHomePageFromThePaymentMethodPage() {
         Assertions.assertEquals("http://automationpractice.com/index.php", homePage.getUrl());
+    }
+
+    @When("I click pay by check")
+    public void iClickPayByCheck() {
+        bankChequePaymentPage = paymentMethodPage.goToBankChequePaymentPageFromPaymentMethodPage();
+    }
+
+    @Then("The Bank Cheque Payment Page appears")
+    public void theBankChequePaymentPageAppears() {
+        Assertions.assertEquals("http://automationpractice.com/index.php?fc=module&module=cheque&controller=payment", bankChequePaymentPage.getUrl());
     }
 }

@@ -6,6 +6,11 @@ Feature: Payment Method Page
     When I click pay by bank wire
     Then The bank wire payment page appears
 
+  Scenario: Selecting 'pay by check'
+    Given I am on the Payment Method Page
+    When I click pay by check
+    Then The Bank Cheque Payment Page appears
+
   Scenario: Clicking Continue Shopping returns user to Shipping Page
     Given I am on the Payment Method Page
     When I click on continue shopping on the Payment Method Page
