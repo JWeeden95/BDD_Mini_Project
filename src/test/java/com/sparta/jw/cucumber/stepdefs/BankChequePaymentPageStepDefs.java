@@ -18,11 +18,10 @@ public class BankChequePaymentPageStepDefs {
     private ShippingPage shippingPage;
     private PaymentMethodPage paymentMethodPage;
     private BankChequePaymentPage bankChequePaymentPage;
-    private ChequePaymentConfirmationPage chequePaymentConfirmationPage;
+    private BankChequePaymentConfirmationPage chequePaymentConfirmationPage;
 
     @Given("I am on the Bank Cheque Payment Page")
     public void iAmOnTheBankChequePaymentPage() {
-        homePage.goToHomePage();
         signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
         homePage = myAccountPage.goToHomePageFromMyAccountPage();
@@ -54,5 +53,15 @@ public class BankChequePaymentPageStepDefs {
     @Then("The user is sent back to the Payment Methods Page from Bank Cheque Payment Page")
     public void theUserIsSentBackToThePaymentMethodsPageFromBankChequePaymentPage() {
         Assertions.assertTrue(paymentMethodPage.getNavigationPageText().contains("Your payment method"));
+    }
+
+    @When("I click on the Home Page Icon on the Bank Cheque Payment Method Page")
+    public void iClickOnTheHomePageIconOnTheBankChequePaymentMethodPage() {
+        homePage = bankChequePaymentPage.goToHomePageFromBankChequePaymentPage();
+    }
+
+    @Then("The user is sent back to the Home Page from the Bank Cheque Payment Method Page")
+    public void theUserIsSentBackToTheHomePageFromTheBankChequePaymentMethodPage() {
+        Assertions.assertEquals("http://automationpractice.com/index.php", homePage.getUrl());
     }
 }

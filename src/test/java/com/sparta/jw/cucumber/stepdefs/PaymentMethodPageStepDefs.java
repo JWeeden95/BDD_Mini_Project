@@ -23,7 +23,6 @@ public class PaymentMethodPageStepDefs {
 
     @Given("I am on the Payment Method Page")
     public void iAmOnThePaymentMethodPage() {
-        homePage.goToHomePage();
         signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
         homePage = myAccountPage.goToHomePageFromMyAccountPage();
