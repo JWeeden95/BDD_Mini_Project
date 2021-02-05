@@ -89,10 +89,4 @@ public class AddressStepDes {
 //    public void iWillHaveADifferentShippingAddress() {
 //    }
 
-    @After
-    public void tearDown()
-    {
-        webDriver.quit();
-        webDriver.close();
-    }
 }
