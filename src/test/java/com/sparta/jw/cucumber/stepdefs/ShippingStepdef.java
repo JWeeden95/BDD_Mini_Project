@@ -1,6 +1,7 @@
 package com.sparta.jw.cucumber.stepdefs;
 
 import com.sparta.jw.pom.pages.*;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -32,16 +33,22 @@ public class ShippingStepdef {
         shippingPage = addressPage.goToShippingPageFromAddressPage();
     }
 
+    @And("I have clicked the agree to terms of service box")
+    public void iHaveClickedTheAgreeToTermsOfServiceBox() {
+        shippingPage.clickConfirmCheckbox();
+    }
 
     @When("I click proceed to checkout from shipping page")
     public void iClickProceedToCheckoutFromShippingPage() {
         paymentMethodPage = shippingPage.goToPaymentMethodPageFromShippingPage();
     }
 
-    @Then("the Payment page appears")
-    public void thePaymentPageAppears() {
+    @Then("confirm I am on the payment confirmation page")
+    public void confirmIAmOnThePaymentConfirmationPage() {
         Assertions.assertTrue(paymentMethodPage.getPageAsString().contains("Pay by bank wire"));
     }
+
+
 
     @When("I click the agree to terms of service box")
     public void iClickTheAgreeToTermsOfServiceBox() {
@@ -52,4 +59,11 @@ public class ShippingStepdef {
     public void theAgreeToTermsOfServiceBoxShouldBeTicked() {
         Assertions.assertTrue(shippingPage.checkConfirmationCheckboxHasBeenTicked());
     }
+
+    @After
+    public void closeDown() {
+        webDriver.quit();
+    }
+
+
 }

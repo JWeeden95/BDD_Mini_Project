@@ -16,7 +16,7 @@ public class ShippingPage extends Page{
     }
 
     public boolean checkConfirmationCheckboxHasBeenTicked() {
-        return webDriver.findElement(termsOfService).isSelected();
+        return webDriver.findElement(termsOfService).isEnabled();
     }
 
     public PaymentMethodPage goToPaymentMethodPageFromShippingPage() {
