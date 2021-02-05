@@ -12,14 +12,19 @@ public class BankChequePaymentPage extends Page {
         this.webDriver = webDriver;
     }
 
-    public ChequePaymentConfirmationPage goToPaymentConfirmationPageFromChequePaymentPage() {
+    public BankChequePaymentConfirmationPage goToPaymentConfirmationPageFromChequePaymentPage() {
         webDriver.findElement(confirmOrder).click();
-        return new ChequePaymentConfirmationPage(webDriver);
+        return new BankChequePaymentConfirmationPage(webDriver);
     }
 
     public PaymentMethodPage goBackToPaymentConfirmationPageFromBankChequePaymentPage() {
         webDriver.findElement(goBackToPaymentPage).click();
         return new PaymentMethodPage(webDriver);
+    }
+
+    public HomePage goToHomePageFromBankChequePaymentPage(){
+        webDriver.findElement(By.className("home")).click();
+        return new HomePage(webDriver);
     }
 }
 
