@@ -14,12 +14,12 @@ public class BankWirePaymentPage extends Page{
         this.webDriver = driver;
     }
 
-    public PaymentConfirmationPage goToPaymentConfirmationPageFromBankWirePaymentPage() {
+    public PaymentConfirmationPage goToPaymentConfirmationPage() {
         webDriver.findElement(confirmOrder).click();
         return new PaymentConfirmationPage(webDriver);
     }
 
-    public PaymentMethodPage goBackToPaymentConfirmationPage() {
+    public PaymentMethodPage goBackToPaymentMethodPage() {
         webDriver.findElement(goBackToPaymentPage).click();
         return new PaymentMethodPage(webDriver);
     }
