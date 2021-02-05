@@ -52,9 +52,5 @@ public class SummaryPageStepdef {
 //    @Then("the total product counter should increment by {int}")
 //    public void theTotalProductCounterShouldIncrementBy(int arg0) {
 //    }
-    @After
-    public void terminate(){
-        webDriver.close();
-        webDriver.quit();
-    }
+
 }

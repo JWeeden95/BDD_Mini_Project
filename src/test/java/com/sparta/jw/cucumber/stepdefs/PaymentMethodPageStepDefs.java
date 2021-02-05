@@ -42,6 +42,7 @@ public class PaymentMethodPageStepDefs {
     @Then("The bank wire payment page appears")
     public void theBankWirePaymentPageAppears() {
         Assertions.assertEquals("http://automationpractice.com/index.php?fc=module&module=bankwire&controller=payment", bankWirePaymentPage.getUrl());
+        webDriver.close();
     }
 
     @When("I click on continue shopping on the Payment Method Page")
@@ -57,5 +58,6 @@ public class PaymentMethodPageStepDefs {
     @Then("The user is sent back to the Shipping Page")
     public void theUserIsSentBackToTheShippingPage() {
         Assertions.assertTrue(shippingPage.getPageAsString().contains("Choose a shipping option for this address:"));
+        webDriver.close();
     }
 }

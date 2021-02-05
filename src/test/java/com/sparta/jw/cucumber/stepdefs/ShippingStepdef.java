@@ -46,6 +46,7 @@ public class ShippingStepdef {
     @Then("confirm I am on the payment confirmation page")
     public void confirmIAmOnThePaymentConfirmationPage() {
         Assertions.assertTrue(paymentMethodPage.getPageAsString().contains("Pay by bank wire"));
+        webDriver.close();
     }
 
 
@@ -58,11 +59,7 @@ public class ShippingStepdef {
     @Then("the agree to terms of service box should be ticked")
     public void theAgreeToTermsOfServiceBoxShouldBeTicked() {
         Assertions.assertTrue(shippingPage.checkConfirmationCheckboxHasBeenTicked());
-    }
-
-    @After
-    public void closeDown() {
-        webDriver.quit();
+        webDriver.close();
     }
 
 

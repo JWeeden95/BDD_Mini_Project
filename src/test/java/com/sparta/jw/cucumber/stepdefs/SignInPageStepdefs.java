@@ -38,11 +38,7 @@ public class SignInPageStepdefs {
     @Then("my account page appears")
     public void myAccountPageAppears() {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=my-account", myAccountPage.getUrl());
+        webDriver.close();
     }
 
-    @After
-    public void tearDown(){
-        webDriver.close();
-        webDriver.quit();
-    }
 }

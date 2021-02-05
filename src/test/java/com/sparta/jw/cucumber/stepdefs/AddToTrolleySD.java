@@ -30,11 +30,6 @@ public class AddToTrolleySD {
     @Then("The cart total will change to {int}")
     public void theCartTotalWillChangeTo(int arg0) {
         Assertions.assertTrue(homePage.correctCartAmount(webDriver, arg0));
-    }
-
-    @After
-    public void tearDown()
-    {
-        webDriver.quit();
+        webDriver.close();
     }
 }

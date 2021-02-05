@@ -34,11 +34,7 @@ public class MyAccountStepdefs {
     @Then("the home page appears")
     public void theHomePageAppears() {
         Assertions.assertEquals("http://automationpractice.com/index.php", homePage.getUrl());
+        webDriver.close();
     }
 
-    @After
-    public void tearDown(){
-        webDriver.close();
-        webDriver.quit();
-    }
 }
