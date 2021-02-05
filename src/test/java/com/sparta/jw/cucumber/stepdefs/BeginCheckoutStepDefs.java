@@ -34,6 +34,7 @@ public class BeginCheckoutStepDefs {
     @Then("The order summary page appears")
     public void theOrderSummaryPageAppears() {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=order", webDriver.getCurrentUrl());
+        webDriver.close();
     }
 
     @And("I have clicked continue shopping")
@@ -46,8 +47,4 @@ public class BeginCheckoutStepDefs {
         homePage.goToSummaryPageFromHomePageAlternative();
     }
 
-    @After
-    void tearDown() {
-        webDriver.quit();
-    }
 }

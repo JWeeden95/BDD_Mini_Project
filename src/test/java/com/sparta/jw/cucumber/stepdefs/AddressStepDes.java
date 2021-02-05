@@ -55,11 +55,6 @@ public class AddressStepDes {
     @Then("I'm taken to the shipping page")
     public void iMTakenToTheShippingPage() {
         Assertions.assertTrue(webDriver.findElement(By.className("page-heading")).getText().contains("SHIPPING"));
-    }
-
-    @After
-    public void tearDown()
-    {
-        webDriver.quit();
+        webDriver.close();
     }
 }
