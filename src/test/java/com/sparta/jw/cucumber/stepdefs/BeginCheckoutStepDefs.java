@@ -1,6 +1,7 @@
 package com.sparta.jw.cucumber.stepdefs;
 
 import com.sparta.jw.pom.pages.HomePage;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -43,5 +44,10 @@ public class BeginCheckoutStepDefs {
     @When("I click the alternative proceed to checkout from home")
     public void iClickTheAlternativeProceedToCheckoutFromHome() {
         homePage.goToSummaryPageFromHomePageAlternative();
+    }
+
+    @After
+    void tearDown() {
+        webDriver.quit();
     }
 }
