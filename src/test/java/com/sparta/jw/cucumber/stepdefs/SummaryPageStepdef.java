@@ -2,6 +2,7 @@ package com.sparta.jw.cucumber.stepdefs;
 
 
 import com.sparta.jw.pom.pages.*;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -41,5 +42,19 @@ public class SummaryPageStepdef {
     public void addressPageAppears() {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=order&step=1", addressPage.getUrl());
         webDriver.close();
+    }
+//
+//    @When("I click on the plus button next to the item")
+//    public void iClickOnThePlusButtonNextToTheItem() {
+//        summaryPage.clickPlusButtonOnTheSummaryPage();
+//    }
+//
+//    @Then("the total product counter should increment by {int}")
+//    public void theTotalProductCounterShouldIncrementBy(int arg0) {
+//    }
+    @After
+    public void terminate(){
+        webDriver.close();
+        webDriver.quit();
     }
 }
