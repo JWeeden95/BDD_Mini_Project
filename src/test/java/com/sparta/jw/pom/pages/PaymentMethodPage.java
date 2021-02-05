@@ -36,6 +36,21 @@ public class PaymentMethodPage extends Page{
         return new ShippingPage(webDriver);
     }
 
+    public AddressPage goToAddressPageFromPaymentMethodPage() {
+        webDriver.findElement(By.xpath("//*[@id=\"order_step\"]/li[3]/a")).click();
+        return new AddressPage(webDriver);
+    }
+
+    public SummaryPage goToSummaryPageFromPaymentMethodPage() {
+        webDriver.findElement(By.xpath("//*[@id=\"order_step\"]/li[1]/a")).click();
+        return new SummaryPage(webDriver);
+    }
+
+    public HomePage goToHomePageFromPaymentMethodPage(){
+        webDriver.findElement(By.className("icon-home")).click();
+        return new HomePage(webDriver);
+    }
+
 }
 
 
