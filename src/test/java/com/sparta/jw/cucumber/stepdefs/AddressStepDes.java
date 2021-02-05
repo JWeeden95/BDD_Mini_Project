@@ -2,6 +2,7 @@ package com.sparta.jw.cucumber.stepdefs;
 
 import com.sparta.jw.pom.pages.AddressPage;
 import com.sparta.jw.pom.pages.*;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -22,7 +23,6 @@ public class AddressStepDes {
     ShippingPage shippingPage;
     SignInPage signInPage;
     MyAccountPage myAccountPage;
-    By comments = new By.ByClassName("form-control");
 
     @Given("that I am on the Address page")
     public void thatIAmOnPage() {
@@ -38,7 +38,6 @@ public class AddressStepDes {
 
     @And("I have left no comment in the comment box")
     public void iHaveLeftNoCommentInTheCommentBox() {
-        webDriver.findElement(comments).sendKeys("Hello World!");
         Assertions.assertTrue(addressPage.isCommentEmpty());
     }
 
@@ -56,5 +55,11 @@ public class AddressStepDes {
     @Then("I'm taken to the shipping page")
     public void iMTakenToTheShippingPage() {
         Assertions.assertTrue(webDriver.findElement(By.className("page-heading")).getText().contains("SHIPPING"));
+    }
+
+    @After
+    public void tearDown()
+    {
+        webDriver.quit();
     }
 }

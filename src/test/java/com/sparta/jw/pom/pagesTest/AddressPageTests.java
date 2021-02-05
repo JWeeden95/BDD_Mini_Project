@@ -9,11 +9,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 public class AddressPageTests {
 
-    WebDriver driver = new ChromeDriver();
+    WebDriver webDriver = new ChromeDriver();
     HomePage homePage;
     SummaryPage summaryPage;
     SignInPage signInPage;
@@ -28,16 +29,19 @@ public class AddressPageTests {
         createProperties();
 //        First need to go to home page
 //                - Homepage object
-        homePage = new HomePage(driver);
+        homePage = new HomePage(webDriver);
 
         addToBasket();
         setSummaryPage();
         setSignInPage();
         Assertions.assertTrue(addressPage.isCommentEmpty());
-        setShippingPage();
+        //setShippingPage();
+        //Assertions.assertTrue(webDriver.findElement(By.className("page-heading")).getText().contains("SHIPPING"));
+        List<String> billing = addressPage.getActualBillingAddress();
+        Assertions.assertTrue(addressPage.IsBillingAddressAndMyAddressTheSame(billing));
+        addressPage.changeBothAddressIfTheyArentDifferent();
     }
 
-    @Test
     public void addToBasket()
     {
         homePage.addFirstItemToBasket();
@@ -51,10 +55,10 @@ public class AddressPageTests {
 
     public void setSignInPage()
     {
-        driver.findElement(By.name("email")).sendKeys(properties.getProperty("username"));
-        driver.findElement(By.name("passwd")).sendKeys(properties.getProperty("password"));
-        driver.findElement(By.id("SubmitLogin")).click();
-        addressPage = new AddressPage(driver);
+        webDriver.findElement(By.name("email")).sendKeys(properties.getProperty("username"));
+        webDriver.findElement(By.name("passwd")).sendKeys(properties.getProperty("password"));
+        webDriver.findElement(By.id("SubmitLogin")).click();
+        addressPage = new AddressPage(webDriver);
     }
 
     public void setShippingPage()
