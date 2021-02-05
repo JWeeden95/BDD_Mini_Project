@@ -1,6 +1,7 @@
 package com.sparta.jw.cucumber.stepdefs;
 
 import com.sparta.jw.pom.pages.*;
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -44,6 +45,21 @@ public class OrderConfirmationStepdefs {
     @Then("the order confirmation page appears")
     public void theOrderConfirmationPageAppears() {
         Assertions.assertTrue(paymentConfirmationPage.getPageAsString().contains("Your order on My Store is complete."));
+    }
+
+    @When("I click other payment methods")
+    public void iClickOtherPaymentMethods() {
+        paymentMethodPage = bankWirePaymentPage.goBackToPaymentMethodPageFromBankWirePaymentPage();
+    }
+
+    @Then("payment method page appears when coming from bank wire payment page")
+    public void paymentMethodPageAppearsWhenComingFromBankWirePaymentPage() {
+        Assertions.assertTrue(shippingPage.getPageAsString().contains("PLEASE CHOOSE YOUR PAYMENT METHOD"));
+    }
+
+    @After
+    public void tearDown() {
+        webDriver.quit();
     }
 
 }

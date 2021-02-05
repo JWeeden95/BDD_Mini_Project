@@ -19,7 +19,7 @@ public class BankWirePaymentPage extends Page{
         return new PaymentConfirmationPage(webDriver);
     }
 
-    public PaymentMethodPage goBackToPaymentConfirmationPage() {
+    public PaymentMethodPage goBackToPaymentMethodPageFromBankWirePaymentPage() {
         webDriver.findElement(goBackToPaymentPage).click();
         return new PaymentMethodPage(webDriver);
     }
