@@ -1,7 +1,6 @@
 package com.sparta.jw.cucumber.stepdefs;
 
 import com.sparta.jw.pom.pages.HomePage;
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -13,13 +12,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class BeginCheckoutStepDefs {
 
-    private WebDriver webDriver;
-    private HomePage homePage;
+    private WebDriver webDriver = new ChromeDriver();
+    private HomePage homePage = new HomePage(webDriver);
 
-//    @Given("I am on the home page")
-//    public void iAmOnTheHomePage() {
-//        homePage.goToHomePage();
-//    }
+    @Given("I am on the home page")
+    public void iAmOnTheHomePage() {
+        homePage.goToHomePage();
+    }
 
     @And("I have clicked add to cart")
     public void iHaveClickedAddToCart() {
@@ -36,8 +35,13 @@ public class BeginCheckoutStepDefs {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=order", webDriver.getCurrentUrl());
     }
 
-    @After
-    void tearDown() {
-        webDriver.quit();
+    @And("I have clicked continue shopping")
+    public void iHaveClickedContinueShopping() {
+        homePage.clickContinueShopping();
+    }
+
+    @When("I click the alternative proceed to checkout from home")
+    public void iClickTheAlternativeProceedToCheckoutFromHome() {
+        homePage.goToSummaryPageFromHomePageAlternative();
     }
 }

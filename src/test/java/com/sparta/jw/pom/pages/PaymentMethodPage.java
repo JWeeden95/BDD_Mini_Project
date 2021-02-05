@@ -27,7 +27,12 @@ public class PaymentMethodPage extends Page{
 //    }
 
     public ShippingPage clickContinueShoppingFromPaymentMethodPage() {
-        webDriver.findElement(By.className("button-exclusive btn btn-default"));
+        webDriver.findElement(By.xpath("//*[@id=\"center_column\"]/div/p/a")).click();
+        return new ShippingPage(webDriver);
+    }
+
+    public ShippingPage goToShippingPageFromPaymentMethodPage() {
+        webDriver.findElement(By.xpath("//*[@id=\"order_step\"]/li[4]/a")).click();
         return new ShippingPage(webDriver);
     }
 

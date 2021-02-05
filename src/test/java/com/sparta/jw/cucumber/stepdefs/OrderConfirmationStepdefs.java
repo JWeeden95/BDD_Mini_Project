@@ -10,16 +10,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class OrderConfirmationStepdefs {
 
-    BankWirePaymentPage bankWirePaymentPage;
-    WebDriver webDriver = new ChromeDriver();
-    HomePage homePage = new HomePage(webDriver);
-    SignInPage signInPage;
-    MyAccountPage myAccountPage;
-    SummaryPage summaryPage;
-    AddressPage addressPage;
-    ShippingPage shippingPage;
-    PaymentMethodPage paymentMethodPage;
-    PaymentConfirmationPage paymentConfirmationPage;
+    private BankWirePaymentPage bankWirePaymentPage;
+    private WebDriver webDriver = new ChromeDriver();
+    private HomePage homePage = new HomePage(webDriver);
+    private SignInPage signInPage;
+    private MyAccountPage myAccountPage;
+    private SummaryPage summaryPage;
+    private AddressPage addressPage;
+    private ShippingPage shippingPage;
+    private PaymentMethodPage paymentMethodPage;
+    private PaymentConfirmationPage paymentConfirmationPage;
 
     @Given("that I am on the bank wire page")
     public void thatIAmOnTheBankWirePage() {
@@ -27,6 +27,7 @@ public class OrderConfirmationStepdefs {
         signInPage = homePage.goToSignInPageFromHomePage();
         myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
         homePage = myAccountPage.goToHomePageFromMyAccountPage();
+        homePage.addFirstItemToBasket();
         summaryPage = homePage.goToSummaryPageFromHomePage();
         addressPage = summaryPage.goToAddressPageFromSummaryPage();
         shippingPage = addressPage.goToShippingPageFromAddressPage();

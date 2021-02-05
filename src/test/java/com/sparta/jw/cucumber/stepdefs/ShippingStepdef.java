@@ -11,14 +11,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ShippingStepdef {
-    static WebDriver webDriver;
-    HomePage homePage;
-    SignInPage signInPage;
-    MyAccountPage myAccountPage;
-    SummaryPage summaryPage;
-    AddressPage addressPage;
-    ShippingPage shippingPage;
-    PaymentMethodPage paymentMethodPage;
+    private static WebDriver webDriver = new ChromeDriver();
+    private HomePage homePage = new HomePage(webDriver);
+    private SignInPage signInPage;
+    private MyAccountPage myAccountPage;
+    private SummaryPage summaryPage;
+    private AddressPage addressPage;
+    private ShippingPage shippingPage;
+    private PaymentMethodPage paymentMethodPage;
 
     @Given("that I am on the shipping page")
     public void thatIAmOnTheShippingPage() {
@@ -30,7 +30,6 @@ public class ShippingStepdef {
         summaryPage = homePage.goToSummaryPageFromHomePage();
         addressPage = summaryPage.goToAddressPageFromSummaryPage();
         shippingPage = addressPage.goToShippingPageFromAddressPage();
-        Assertions.assertTrue(shippingPage.getPageAsString().contains("Choose a shipping option for this address:"));
     }
 
     @And("I have ticked the ‘agree to terms of service’ box")
@@ -45,7 +44,7 @@ public class ShippingStepdef {
 
     @Then("the Payment page appears")
     public void thePaymentPageAppears() {
-        Assertions.assertTrue(shippingPage.getPageAsString().contains("PLEASE CHOOSE YOUR PAYMENT METHOD"));
+        Assertions.assertTrue(paymentMethodPage.getPageAsString().contains("Pay by bank wire"));
     }
 
 }
