@@ -19,3 +19,8 @@ Feature: Summary confirmation
     Given I am on the order summary page and i have 2 items in the basket
     When I click on the minus button next to the item
     Then the total product counter should be 1
+
+  Scenario: Going to the alternate sign-in page
+    Given I am on the order summary page nosignin
+    When I click proceed to checkout from Summary page with no signin
+    Then Alternate signing page appears

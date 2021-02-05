@@ -14,6 +14,10 @@ public class SummaryPage extends Page{
         webDriver.findElement(By.linkText("Proceed to checkout")).click();
         return new AddressPage(webDriver);
     }
+    public SignInPage goToSigninPageFromSummaryPage() {
+        webDriver.findElement(By.linkText("Proceed to checkout")).click();
+        return new SignInPage(webDriver);
+    }
     public boolean correctCartAmountOnTheSummaryPage(int itemCount) {
         String total = webDriver.findElement(By.id("summary_products_quantity")).getText();
         String itemCountInString = itemCount + "";

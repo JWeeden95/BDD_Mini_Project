@@ -2,7 +2,6 @@ package com.sparta.jw.cucumber.stepdefs;
 
 
 import com.sparta.jw.pom.pages.*;
-import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,6 +16,7 @@ public class SummaryPageStepdef {
     private HomePage homePage = new HomePage(webDriver);
     private SummaryPage summaryPage;
     private AddressPage addressPage;
+    private SignInPage signInPage;
 
     @Given("I am on the order summary page")
     public void iAmOnTheOrderSummaryPage() {
@@ -75,5 +75,23 @@ public class SummaryPageStepdef {
         summaryPage = homePage.goToSummaryPageFromHomePage();
         summaryPage.clickPlusButtonMultiTimesOnTheSummaryPage(1);
         Thread.sleep(2000);
+    }
+
+    @Then("Alternate signing page appears")
+    public void alternateSigningPageAppears() {
+        //Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&multi-shipping=0&display_guest_checkout=0&back=http%3A%2F%2Fautomationpractice.com%2Findex.php%3Fcontroller%3Dorder%26step%3D1%26multi-shipping%3D0",signInPage.getUrl());
+        Assertions.assertTrue(signInPage.hasOrderStepBar());
+        webDriver.quit();
+    }
+
+    @When("I click proceed to checkout from Summary page with no signin")
+    public void iClickProceedToCheckoutFromSummaryPageWithNoSignin() {
+        signInPage = summaryPage.goToSigninPageFromSummaryPage();
+    }
+
+    @Given("I am on the order summary page nosignin")
+    public void iAmOnTheOrderSummaryPageNosignin() {
+        homePage.addFirstItemToBasket();
+        summaryPage = homePage.goToSummaryPageFromHomePage();
     }
 }
