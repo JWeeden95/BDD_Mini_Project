@@ -31,4 +31,10 @@ public class AddToTrolleySD {
     public void theCartTotalWillChangeTo(int arg0) {
         Assertions.assertTrue(homePage.correctCartAmount(webDriver, arg0));
     }
+
+    @After
+    public void tearDown()
+    {
+        webDriver.quit();
+    }
 }

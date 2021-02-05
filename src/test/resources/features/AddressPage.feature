@@ -10,3 +10,5 @@ Feature: Address confirmation issue15
     And my billing information is correct
     When I click proceed to checkout from address page
     Then I'm taken to the shipping page
+
+    Scenario: Change shipping address

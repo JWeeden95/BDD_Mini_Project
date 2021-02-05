@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 public class AddressPageTests {
@@ -34,8 +35,11 @@ public class AddressPageTests {
         setSummaryPage();
         setSignInPage();
         Assertions.assertTrue(addressPage.isCommentEmpty());
-        setShippingPage();
-        Assertions.assertTrue(webDriver.findElement(By.className("page-heading")).getText().contains("SHIPPING"));
+        //setShippingPage();
+        //Assertions.assertTrue(webDriver.findElement(By.className("page-heading")).getText().contains("SHIPPING"));
+        List<String> billing = addressPage.getActualBillingAddress();
+        Assertions.assertTrue(addressPage.IsBillingAddressAndMyAddressTheSame(billing));
+        addressPage.changeBothAddressIfTheyArentDifferent();
     }
 
     public void addToBasket()

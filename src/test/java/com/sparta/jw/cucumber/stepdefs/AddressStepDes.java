@@ -2,6 +2,7 @@ package com.sparta.jw.cucumber.stepdefs;
 
 import com.sparta.jw.pom.pages.AddressPage;
 import com.sparta.jw.pom.pages.*;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -54,5 +55,11 @@ public class AddressStepDes {
     @Then("I'm taken to the shipping page")
     public void iMTakenToTheShippingPage() {
         Assertions.assertTrue(webDriver.findElement(By.className("page-heading")).getText().contains("SHIPPING"));
+    }
+
+    @After
+    public void tearDown()
+    {
+        webDriver.quit();
     }
 }

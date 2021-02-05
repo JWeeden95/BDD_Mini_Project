@@ -3,6 +3,7 @@ package com.sparta.jw.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class AddressPage extends Page{
 
@@ -17,6 +19,7 @@ public class AddressPage extends Page{
 
     private static final Properties properties = new Properties();
     private static final String PROPERTIES_PATH = "src/test/resources/userDetails.properties";
+    By clickEqualAddress = new By.ById("addressesAreEquals");
     List<String> bAddress = new ArrayList<>();
     List<String> sAddress = new ArrayList<>();
     List<String> actualBillingAddress = new ArrayList<>();
@@ -88,5 +91,20 @@ public class AddressPage extends Page{
     {
         webDriver.findElement(By.name("processAddress")).click();
         return new ShippingPage(webDriver);
+    }
+
+    public void makeAddressNotShipping()
+    {
+        webDriver.findElement(clickEqualAddress).click();
+    }
+
+    public void changeBothAddressIfTheyArentDifferent()
+    {
+        Actions actions = new Actions(webDriver);
+        webDriver.findElement(By.className("selector")).click();
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(1)")).click();
     }
 }
