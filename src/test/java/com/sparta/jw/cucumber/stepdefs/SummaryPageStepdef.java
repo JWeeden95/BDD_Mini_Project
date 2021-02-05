@@ -43,14 +43,18 @@ public class SummaryPageStepdef {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=order&step=1", addressPage.getUrl());
         webDriver.close();
     }
-//
-//    @When("I click on the plus button next to the item")
-//    public void iClickOnThePlusButtonNextToTheItem() {
-//        summaryPage.clickPlusButtonOnTheSummaryPage();
-//    }
-//
-//    @Then("the total product counter should increment by {int}")
-//    public void theTotalProductCounterShouldIncrementBy(int arg0) {
-//    }
 
+    @When("I click on the plus button next to the item")
+    public void iClickOnThePlusButtonNextToTheItem() throws InterruptedException {
+        summaryPage.clickPlusButtonOnTheSummaryPage();
+        Thread.sleep(4000);
+    }
+
+    @Then("the total product counter should be {int}")
+    public void theTotalProductCounterShouldBe(int arg0) {
+        boolean isTheCartAmountCorrect1;
+        isTheCartAmountCorrect1 = summaryPage.correctCartAmountOnTheSummaryPage(arg0);
+        Assertions.assertTrue(isTheCartAmountCorrect1);
+        webDriver.close();
+    }
 }

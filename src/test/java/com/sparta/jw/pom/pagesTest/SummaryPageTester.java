@@ -4,8 +4,12 @@ import com.sparta.jw.pom.pages.*;
 import io.cucumber.java.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +17,8 @@ public class SummaryPageTester {
 
     WebDriver webDriver = new ChromeDriver();
     private HomePage homePage = new HomePage(webDriver);
+    WebDriverWait wait = new WebDriverWait(webDriver,30);
+
     @Test
     @DisplayName("Clicking the proceed to checkout button")
     public void clickCheckoutButton() {
@@ -44,7 +50,7 @@ public class SummaryPageTester {
     }
     @Test
     @DisplayName("Testing the plus button on the summary page")
-    public void testingPlusButtonOnTheSummaryPage(){
+    public void testingPlusButtonOnTheSummaryPage() throws InterruptedException {
         boolean isTheCartAmountCorrect;
         homePage.goToHomePage();
         SignInPage signInPage = homePage.goToSignInPageFromHomePage();
@@ -53,7 +59,7 @@ public class SummaryPageTester {
         homePage.addFirstItemToBasket();
         SummaryPage summaryPage = homePage.goToSummaryPageFromHomePage();
         summaryPage.clickPlusButtonOnTheSummaryPage();
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Thread.sleep(2000);
         isTheCartAmountCorrect = summaryPage.correctCartAmountOnTheSummaryPage(2);
         Assertions.assertTrue(isTheCartAmountCorrect);
         webDriver.close();
