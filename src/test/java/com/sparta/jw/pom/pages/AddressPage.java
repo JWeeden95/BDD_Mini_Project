@@ -20,7 +20,7 @@ public class AddressPage extends Page{
     private static final Properties properties = new Properties();
     private static final String PROPERTIES_PATH = "src/test/resources/userDetails.properties";
     By clickEqualAddress = new By.ById("addressesAreEquals");
-    List<String> bAddress = new ArrayList<>();
+    List<String> bAddress;
     List<String> sAddress = new ArrayList<>();
     List<String> actualBillingAddress = new ArrayList<>();
     By comments = new By.ByClassName("form-control");
@@ -60,6 +60,7 @@ public class AddressPage extends Page{
 
     public List<String> getBillingAddress()
     {
+        bAddress = new ArrayList<>();
         String string = webDriver.findElement(By.cssSelector("#address_invoice")).getText();
         bAddress.addAll(Arrays.asList(string.split("([\n]|[,])")));
         bAddress.remove(0);
@@ -75,13 +76,13 @@ public class AddressPage extends Page{
 
     public boolean IsBillingAddressAndMyAddressTheSame(List<String> myAdd)
     {
-        boolean isSame = false;
+        boolean isSame = true;
         getBillingAddress();
         for(int i = 0; i < bAddress.size(); i++)
         {
-            if(myAdd.get(i).equals(bAddress.get(i)))
+            if(!myAdd.get(i).equals(bAddress.get(i)))
             {
-                isSame = true;
+                isSame = false;
             }
         }
         return isSame;
@@ -93,18 +94,26 @@ public class AddressPage extends Page{
         return new ShippingPage(webDriver);
     }
 
-    public void makeAddressNotShipping()
+    public void switchOfSameAddress()
     {
         webDriver.findElement(clickEqualAddress).click();
     }
 
     public void changeBothAddressIfTheyArentDifferent()
     {
-        Actions actions = new Actions(webDriver);
         webDriver.findElement(By.className("selector")).click();
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(1)")).click();
     }
+
+    public void changeShippingAddress()
+    {
+        webDriver.findElement(By.className("selector")).click();
+        webDriver.findElement(By.cssSelector("#id_address_delivery > option:nth-child(2)")).click();
+    }
+
+    public boolean addressIsShipping()
+    {
+        return webDriver.findElement(clickEqualAddress).isSelected();
+    }
+
 }

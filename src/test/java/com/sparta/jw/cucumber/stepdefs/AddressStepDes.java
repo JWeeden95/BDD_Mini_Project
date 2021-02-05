@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class AddressStepDes {
 
@@ -55,6 +56,43 @@ public class AddressStepDes {
     @Then("I'm taken to the shipping page")
     public void iMTakenToTheShippingPage() {
         Assertions.assertTrue(webDriver.findElement(By.className("page-heading")).getText().contains("SHIPPING"));
+    }
+
+    @And("My shipping Address is my Billing Address button checked")
+    public void myShippingAddressIsMyBillingAddressButtonChecked() {
+        Assertions.assertTrue(addressPage.addressIsShipping());
+    }
+
+    @When("I change my address")
+    public void iChangeMyAddress() {
+        addressPage.changeBothAddressIfTheyArentDifferent();
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }
+
+    @Then("My address for both billing and shipping changed to selected")
+    public void myAddressForBothBillingAndShippingChangedToSelected() {
+        List<String> storedAdd = addressPage.getActualBillingAddress();
+        Assertions.assertFalse(addressPage.IsBillingAddressAndMyAddressTheSame(storedAdd));
+    }
+//
+//    @And("My shipping Address isn't my billing address")
+//    public void myShippingAddressIsnTMyBillingAddress() {
+//        addressPage.switchOfSameAddress();
+//    }
+//
+//    @When("I change my shipping address")
+//    public void iChangeMyShippingAddress() {
+//
+//    }
+//
+//    @Then("I will have a different shipping address")
+//    public void iWillHaveADifferentShippingAddress() {
+//    }
+
+    @After
+    public void tearDown()
+    {
+        webDriver.quit();
         webDriver.close();
     }
 }
