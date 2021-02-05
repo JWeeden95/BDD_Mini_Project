@@ -84,4 +84,19 @@ public class SummaryPageTester {
         Assertions.assertTrue(isTheCartAmountCorrect);
         webDriver.close();
     }
+
+    @Test
+    @DisplayName("Hitting the trash button")
+    public void clickingTheTrashButton() throws InterruptedException {
+        homePage.goToHomePage();
+        SignInPage signInPage = homePage.goToSignInPageFromHomePage();
+        MyAccountPage myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
+        homePage = myAccountPage.goToHomePageFromMyAccountPage();
+        homePage.addFirstItemToBasket();
+        SummaryPage summaryPage = homePage.goToSummaryPageFromHomePage();
+        summaryPage.clickTheDeleteButtonOnSummaryPage();
+        Thread.sleep(4000);
+        Assertions.assertTrue(summaryPage.isMyCartEmpty());
+        webDriver.close();
+    }
 }
