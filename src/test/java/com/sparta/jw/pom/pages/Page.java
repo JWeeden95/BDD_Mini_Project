@@ -12,4 +12,12 @@ public abstract class Page {
     public String getPageAsString() {
         return webDriver.getPageSource();
     }
+
+    public void goForward() {
+        webDriver.navigate().forward();
+    }
+
+    public void goBack() {
+        webDriver.navigate().back();
+    }
 }
