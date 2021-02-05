@@ -40,6 +40,7 @@ public class AddressPageTests {
         List<String> billing = addressPage.getActualBillingAddress();
         Assertions.assertTrue(addressPage.IsBillingAddressAndMyAddressTheSame(billing));
         addressPage.changeBothAddressIfTheyArentDifferent();
+        Assertions.assertFalse(addressPage.IsBillingAddressAndMyAddressTheSame(billing));
     }
 
     public void addToBasket()

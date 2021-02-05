@@ -44,7 +44,12 @@ public class BeginCheckoutStepDefs {
 
     @When("I click the alternative proceed to checkout from home")
     public void iClickTheAlternativeProceedToCheckoutFromHome() {
-        homePage.goToSummaryPageFromHomePageAlternative();
+        homePage.goToSummaryPageByClickingCartDropdown();
+    }
+
+    @When("I click the cart")
+    public void iClickTheCart() {
+        homePage.goToSummaryPageByClickingShoppingCart();
     }
 
 }

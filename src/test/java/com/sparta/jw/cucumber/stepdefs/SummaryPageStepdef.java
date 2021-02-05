@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SummaryPageStepdef {
-    boolean isTheCartAmountCorrect;
+
     WebDriver webDriver = new ChromeDriver();
     private HomePage homePage = new HomePage(webDriver);
     private SummaryPage summaryPage;
@@ -30,7 +30,7 @@ public class SummaryPageStepdef {
 
     @And("I have {int} item")
     public void iHaveSomethingInMyCart(int arg0) {
-        isTheCartAmountCorrect = summaryPage.correctCartAmountOnTheSummaryPage(arg0);
+
     }
 
     @When("I click proceed to checkout from Summary page")
@@ -43,14 +43,37 @@ public class SummaryPageStepdef {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=order&step=1", addressPage.getUrl());
         webDriver.close();
     }
-//
-//    @When("I click on the plus button next to the item")
-//    public void iClickOnThePlusButtonNextToTheItem() {
-//        summaryPage.clickPlusButtonOnTheSummaryPage();
-//    }
-//
-//    @Then("the total product counter should increment by {int}")
-//    public void theTotalProductCounterShouldIncrementBy(int arg0) {
-//    }
 
+    @When("I click on the plus button next to the item")
+    public void iClickOnThePlusButtonNextToTheItem() throws InterruptedException {
+        summaryPage.clickPlusButtonOnTheSummaryPage();
+        Thread.sleep(4000);
+    }
+
+    @Then("the total product counter should be {int}")
+    public void theTotalProductCounterShouldBe(int arg0) {
+        boolean isTheCartAmountCorrect;
+        isTheCartAmountCorrect = summaryPage.correctCartAmountOnTheSummaryPage(arg0);
+        Assertions.assertTrue(isTheCartAmountCorrect);
+        webDriver.close();
+    }
+
+    @When("I click on the minus button next to the item")
+    public void iClickOnTheMinusButtonNextToTheItem() throws InterruptedException {
+        summaryPage.clickMinusButtonOnTheSummaryPage();
+        Thread.sleep(2000);
+    }
+
+    @Given("I am on the order summary page and i have {int} items in the basket")
+    public void iAmOnTheOrderSummaryPageAndIHaveItemsInTheBasket(int arg0) throws InterruptedException {
+
+        homePage.goToHomePage();
+        SignInPage signInPage = homePage.goToSignInPageFromHomePage();
+        MyAccountPage myAccountPage = signInPage.goToMyAccountPageFromSignInPage();
+        homePage = myAccountPage.goToHomePageFromMyAccountPage();
+        homePage.addFirstItemToBasket();
+        summaryPage = homePage.goToSummaryPageFromHomePage();
+        summaryPage.clickPlusButtonMultiTimesOnTheSummaryPage(1);
+        Thread.sleep(2000);
+    }
 }

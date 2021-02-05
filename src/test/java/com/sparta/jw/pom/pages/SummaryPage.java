@@ -22,7 +22,25 @@ public class SummaryPage extends Page{
     public void clickPlusButtonOnTheSummaryPage(){
         webDriver.findElement(By.className("icon-plus")).click();
     }
-
+    public void clickMinusButtonOnTheSummaryPage(){
+        webDriver.findElement(By.className("icon-minus")).click();
+    }
+    public void clickMinusButtonMultiTimesOnTheSummaryPage(int number){
+        for (int i = 0;i<number;i++) {
+            webDriver.findElement(By.className("icon-minus")).click();
+        }
+    }
+    public void clickPlusButtonMultiTimesOnTheSummaryPage(int number){
+        for (int i = 0;i<number;i++) {
+            webDriver.findElement(By.className("icon-plus")).click();
+        }
+    }
+    public void clickTheDeleteButtonOnSummaryPage(){
+        webDriver.findElement(By.className("cart_quantity_delete")).click();
+    }
+    public boolean isMyCartEmpty(){
+        return webDriver.findElement(By.xpath("//*[@id=\"center_column\"]/p")).isDisplayed();
+    }
     //Added by me for testing on LetsDoThis class, remove if you need to (JF)
     public WebDriver clickProceedToCheckoutAtSummaryPageNoSignIn() {
         webDriver.findElement(By.linkText("Proceed to checkout")).click();
