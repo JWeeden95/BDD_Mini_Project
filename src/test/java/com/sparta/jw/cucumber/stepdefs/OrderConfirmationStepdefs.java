@@ -54,9 +54,8 @@ public class OrderConfirmationStepdefs {
 
     @Then("payment method page appears when coming from bank wire payment page")
     public void paymentMethodPageAppearsWhenComingFromBankWirePaymentPage() {
-        Assertions.assertTrue(shippingPage.getPageAsString().contains("PLEASE CHOOSE YOUR PAYMENT METHOD"));
+        Assertions.assertTrue(paymentMethodPage.getPageAsString().contains("Pay by bank wire"));
         webDriver.close();
     }
-
 
 }
